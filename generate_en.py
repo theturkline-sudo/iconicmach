@@ -27,7 +27,7 @@ def make_hero(filename):
         return f'''
     <section class="page-hero" style="position:relative; height:100vh; min-height:600px; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden;">
         <video autoplay loop muted playsinline src="{src}"
-            style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:scale(1.25) translate(5%, 3%);"></video>
+            style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:scale(1.15) translate(-2%, -2%);"></video>
         <div style="position:absolute; inset:0; background:rgba(6,18,38,0.62); z-index:1;"></div>
         <div class="container reveal fade-in" style="position:relative; z-index:2; color:#fff; padding: 0 20px;">
             <p style="font-size:1rem; letter-spacing:3px; text-transform:uppercase; opacity:0.8; margin-bottom:16px;">Iconic Mach Engineering</p>
@@ -44,7 +44,7 @@ def make_hero(filename):
         return f'''
     <section class="page-hero" style="position:relative; height:55vh; min-height:380px; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden;">
         <video autoplay loop muted playsinline src="{src}"
-            style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:scale(1.25) translate(5%, 3%);"></video>
+            style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:scale(1.15) translate(-2%, -2%);"></video>
         <div style="position:absolute; inset:0; background:rgba(6,18,38,0.58); z-index:1;"></div>
         <div class="container reveal fade-in" style="position:relative; z-index:2; color:#fff; padding:0 20px;">
             <h1 style="font-size:clamp(1.8rem,4vw,3.2rem); font-weight:700; margin-bottom:14px; text-shadow:0 2px 12px rgba(0,0,0,0.4);">{title}</h1>
