@@ -1,0 +1,21 @@
+{
+  "name": "Iconic Mach Engineering",
+  "short_name": "Iconic Mach",
+  "description": "حلول متكاملة لخطوط الإنتاج وأنظمة السيور الناقلة",
+  "icons": [
+    {
+      "src": "/assets/images/iconicmach.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/iconicmach.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/ar/",
+  "display": "standalone",
+  "theme_color": "#0a3150",
+  "background_color": "#ffffff"
+}

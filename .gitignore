@@ -1,0 +1,13 @@
+# gitignore
+generate_ar.py
+generate_en.py
+*.pyc
+.DS_Store
+Thumbs.db
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example

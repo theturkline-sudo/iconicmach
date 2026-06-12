@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Quotation | Iconic Mach Engineering</title>
+    <meta name="description" content="Request a quotation from Iconic Mach Engineering for your industrial project.">
+    <link rel="canonical" href="https://iconicmach.com/en/request-quotation.html">
+    <meta property="og:title" content="Request Quotation | Iconic Mach Engineering">
+    <meta property="og:description" content="Request a quotation from Iconic Mach Engineering for your industrial project.">
+    <meta property="og:url" content="https://iconicmach.com/en/request-quotation.html">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes bounceDown {
+            0%,100% { transform: translateX(-50%) translateY(0); opacity:0.7; }
+            50% { transform: translateX(-50%) translateY(10px); opacity:1; }
+        }
+        details summary::-webkit-details-marker { display:none; }
+        details[open] summary span { transform:rotate(45deg); display:inline-block; transition:transform .2s; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="top-bar-contact">
+                <a href="https://wa.me/20108472717" target="_blank" rel="noopener" style="margin-right: 15px;">
+                    <span>📱</span> +20 108 472 717
+                </a>
+                <a href="mailto:sales@iconicmach.com" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">
+                    <span>✉️</span> sales@iconicmach.com
+                </a>
+            </div>
+            <div class="top-bar-social">
+                <a href="https://www.facebook.com/profile.php?id=61590272801593" target="_blank" aria-label="Facebook">Facebook</a>
+                <a href="https://www.linkedin.com/in/mahmoud-turk-82bbb8412/" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+            </div>
+        </div>
+    </div>
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo-container">
+                <img src="../assets/images/iconicmach.png" alt="Iconic Mach Engineering">
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="production-lines.html">Production Lines</a></li>
+                    <li><a href="conveyor-systems.html">Conveyor Systems</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button id="theme-toggle" class="icon-btn">🌙</button>
+                <a href="../ar/request-quotation.html" id="lang-toggle" class="badge">عربي</a>
+                <div class="menu-toggle"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        
+    <section class="page-hero" style="position:relative; height:55vh; min-height:380px; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden; background:url('../assets/images/industrial-process-4.jpeg') center/cover no-repeat;">
+        <div style="position:absolute; inset:0; background:rgba(6,18,38,0.58);"></div>
+        <div class="container reveal fade-in" style="position:relative; z-index:2; color:#fff; padding:0 20px;">
+            <h1 style="font-size:clamp(1.8rem,4vw,3.2rem); font-weight:700; margin-bottom:14px; text-shadow:0 2px 12px rgba(0,0,0,0.4);">Request a Quotation</h1>
+            <p style="font-size:1.1rem; max-width:600px; margin:0 auto; opacity:0.88; line-height:1.7;">Tell us about your project and we will deliver a competitive estimate.</p>
+        </div>
+    </section>
+        
+    <section id="main-content" class="section">
+        <div class="container" style="max-width:700px;">
+            <p style="text-align:center; line-height:1.8; margin-bottom:40px; color:var(--text-muted);">Fill in the form below and our sales team will get back to you within one business day with a detailed, competitive quotation.</p>
+            <form action="#" method="POST" class="card bg-main" style="display:flex; flex-direction:column; gap:18px; padding:40px; box-shadow:var(--shadow-md);">
+                <input type="text" placeholder="Full Name" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
+                <input type="text" placeholder="Company Name" style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
+                <input type="email" placeholder="Email Address" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
+                <input type="tel" placeholder="Phone / WhatsApp" style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
+                <select style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
+                    <option value="">Product / Service Required</option>
+                    <option>Production Line</option>
+                    <option>Conveyor System</option>
+                    <option>Maintenance Contract</option>
+                    <option>Automation Upgrade</option>
+                    <option>Spare Parts</option>
+                    <option>Other</option>
+                </select>
+                <textarea placeholder="Describe your project requirements..." rows="6" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt); resize:vertical;"></textarea>
+                <button type="submit" class="btn btn-primary" style="padding:14px; font-weight:600; border:none; cursor:pointer; font-size:1rem;">Submit Quotation Request</button>
+            </form>
+        </div>
+    </section>
+    </main>
+
+    
+    <footer class="site-footer" style="background:#061226; color:#c9d8ec; padding: 64px 0 0;">
+        <div class="container">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:48px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08);">
+                <!-- Brand -->
+                <div>
+                    <img src="../assets/images/iconicmach.png" alt="Iconic Mach Engineering" style="height:75px; margin-bottom:16px; filter:brightness(10);">
+                    <p style="font-size:0.92rem; line-height:1.8; opacity:0.7; max-width:240px;">Designing and manufacturing world-class production lines and conveyor systems across Egypt and the GCC.</p>
+                    <div style="display:flex; gap:12px; margin-top:20px;">
+                        <a href="https://www.facebook.com/profile.php?id=61590272801593" target="_blank" aria-label="Facebook" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#c9d8ec;text-decoration:none;font-size:0.85rem;transition:background .2s;" onmouseover="this.style.background='#1877f2'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">f</a>
+                        <a href="https://www.linkedin.com/in/mahmoud-turk-82bbb8412/" target="_blank" aria-label="LinkedIn" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#c9d8ec;text-decoration:none;font-size:0.85rem;transition:background .2s;" onmouseover="this.style.background='#0077b5'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">in</a>
+                        <a href="https://wa.me/20108472717" aria-label="WhatsApp" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#c9d8ec;text-decoration:none;font-size:0.85rem;transition:background .2s;" onmouseover="this.style.background='#25d366'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">W</a>
+                    </div>
+                </div>
+                <!-- Products -->
+                <div>
+                    <h4 style="color:#fff; font-size:1rem; font-weight:600; margin-bottom:18px; letter-spacing:0.5px;">Products</h4>
+                    <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+                        <li><a href="production-lines.html" style="color:#c9d8ec; text-decoration:none; font-size:0.9rem; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Production Lines</a></li>
+                        <li><a href="conveyor-systems.html" style="color:#c9d8ec; text-decoration:none; font-size:0.9rem; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Conveyor Systems</a></li>
+                        <li><a href="spare-parts.html" style="color:#c9d8ec; text-decoration:none; font-size:0.9rem; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Spare Parts</a></li>
+                        <li><a href="request-quotation.html" style="color:#c9d8ec; text-decoration:none; font-size:0.9rem; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Request a Quote</a></li>
+                    </ul>
+                </div>
+                <!-- Company -->
+                <div>
+                    <h4 style="color:#fff; font-size:1rem; font-weight:600; margin-bottom:18px; letter-spacing:0.5px;">Company</h4>
+                    <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+                        <li><a href="about.html" style="color:#c9d8ec; text-decoration:none; font-size:0.9rem; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">About Us</a></li>
+                        <li><a href="services.html" style="color:#c9d8ec; text-decoration:none; font-size:0.9rem; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Services</a></li>
+                        <li><a href="industries.html" style="color:#c9d8ec; text-decoration:none; font-size:0.9rem; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Industries</a></li>
+                        <li><a href="projects.html" style="color:#c9d8ec; text-decoration:none; font-size:0.9rem; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Projects</a></li>
+                        <li><a href="blog.html" style="color:#c9d8ec; text-decoration:none; font-size:0.9rem; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">Blog</a></li>
+                        <li><a href="faq.html" style="color:#c9d8ec; text-decoration:none; font-size:0.9rem; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">FAQs</a></li>
+                    </ul>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <h4 style="color:#fff; font-size:1rem; font-weight:600; margin-bottom:18px; letter-spacing:0.5px;">Contact</h4>
+                    <ul style="list-style:none; display:flex; flex-direction:column; gap:12px; font-size:0.9rem;">
+                        <li style="display:flex; gap:10px; align-items:flex-start;"><span style="margin-top:2px;">📍</span><span style="opacity:0.8;">Shams Mall, 10th Of Ramadan,<br>Al Sharqiya, Egypt</span></li>
+                        <li style="display:flex; gap:10px; align-items:center;"><span>📱</span><a href="https://wa.me/20108472717" style="color:#4adeae; text-decoration:none;">+20 108 472 717</a></li>
+                        <li style="display:flex; gap:10px; align-items:center;"><span>✉️</span><a href="mailto:sales@iconicmach.com" style="color:#4adeae; text-decoration:none;">sales@iconicmach.com</a></li>
+                        <li style="display:flex; gap:10px; align-items:center;"><span>🔧</span><a href="mailto:technical@iconicmach.com" style="color:#4adeae; text-decoration:none;">technical@iconicmach.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Bottom bar -->
+            <div style="padding:24px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.85rem; opacity:0.6;">
+                <p style="margin:0;">&copy; 2026 Iconic Mach Engineering. All rights reserved.</p>
+                <div style="display:flex; gap:20px;">
+                    <a href="privacy-policy.html" style="color:#c9d8ec; text-decoration:none;">Privacy Policy</a>
+                    <a href="terms.html" style="color:#c9d8ec; text-decoration:none;">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/animations.js"></script>
+</body>
+</html>

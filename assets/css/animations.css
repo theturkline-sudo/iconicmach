@@ -1,0 +1,62 @@
+/* assets/css/animations.css */
+
+/* Initial hidden state for elements to animate on scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+/* Active state triggered by JS IntersectionObserver */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Variations */
+.reveal.fade-in {
+    transform: translateY(0);
+}
+
+.reveal.slide-left {
+    transform: translateX(30px);
+}
+
+[dir="rtl"] .reveal.slide-left {
+    transform: translateX(-30px);
+}
+
+.reveal.slide-right {
+    transform: translateX(-30px);
+}
+
+[dir="rtl"] .reveal.slide-right {
+    transform: translateX(30px);
+}
+
+/* Stagger delays */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+
+/* Micro-animations */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(10, 49, 80, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(10, 49, 80, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(10, 49, 80, 0); }
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}

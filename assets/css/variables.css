@@ -1,0 +1,57 @@
+/* assets/css/variables.css */
+:root {
+    /* Color Palette derived from logo */
+    --primary-blue: #0a2240;
+    --primary-blue-light: #143d6c;
+    --accent-gray: #8a9ba8;
+    
+    /* Backgrounds & Surfaces */
+    --bg-main: #ffffff;
+    --bg-alt: #f8f9fa;
+    --surface-light: #e7e7e7;
+    --surface-dark: #0a2240;
+    
+    /* Text Colors */
+    --text-main: #333333;
+    --text-muted: #5e6c75;
+    --text-light: #ffffff;
+    
+    /* Typography */
+    --font-primary: 'Inter', 'Tajawal', sans-serif;
+    --font-heading: 'Outfit', 'Cairo', sans-serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 4rem;
+    --spacing-section: 6rem;
+    
+    /* Borders & Shadows */
+    --border-radius: 8px;
+    --border-radius-lg: 16px;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 30px rgba(10, 49, 80, 0.15);
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Palette */
+[data-theme="dark"] {
+    --bg-main: #0a1118;
+    --bg-alt: #111a24;
+    --surface-light: #1c2b3a;
+    --surface-dark: #143d6c;
+    
+    --text-main: #f8f9fa;
+    --text-muted: #a0aec0;
+    
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.5);
+}

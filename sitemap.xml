@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Arabic Pages -->
+  <url>
+    <loc>https://iconicmach.com/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/" />
+  </url>
+  <url>
+    <loc>https://iconicmach.com/ar/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/about.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/about.html" />
+  </url>
+  <url>
+    <loc>https://iconicmach.com/ar/production-lines.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/production-lines.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/production-lines.html" />
+  </url>
+  <url>
+    <loc>https://iconicmach.com/ar/conveyor-systems.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/conveyor-systems.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/conveyor-systems.html" />
+  </url>
+  <url>
+    <loc>https://iconicmach.com/ar/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/services.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/services.html" />
+  </url>
+  <url>
+    <loc>https://iconicmach.com/ar/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/contact.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/contact.html" />
+  </url>
+  
+  <!-- English Pages -->
+  <url>
+    <loc>https://iconicmach.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/" />
+  </url>
+  <url>
+    <loc>https://iconicmach.com/en/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/about.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/about.html" />
+  </url>
+  <url>
+    <loc>https://iconicmach.com/en/production-lines.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/production-lines.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/production-lines.html" />
+  </url>
+  <url>
+    <loc>https://iconicmach.com/en/conveyor-systems.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/conveyor-systems.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/conveyor-systems.html" />
+  </url>
+  <url>
+    <loc>https://iconicmach.com/en/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/services.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/services.html" />
+  </url>
+  <url>
+    <loc>https://iconicmach.com/en/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/contact.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/contact.html" />
+  </url>
+</urlset>
