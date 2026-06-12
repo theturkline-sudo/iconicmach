@@ -47,12 +47,16 @@ main {
 
 .top-bar-social {
     display: flex;
-    gap: 15px;
+    gap: 8px;
+    align-items: center;
 }
 
-.top-bar-social a:hover,
 .top-bar a:hover {
     color: var(--accent-gray);
+}
+
+.top-bar-social a svg {
+    display: block;
 }
 
 /* Header */
