@@ -6,7 +6,7 @@ domain = "https://iconicmach.com"
 # Google Analytics 4 — paste the Measurement ID (looks like "G-XXXXXXXXXX")
 # from Analytics → Admin → Data streams → your web stream, then re-run this
 # script. Leave it empty and no tracking code is emitted at all.
-GA_MEASUREMENT_ID = ""
+GA_MEASUREMENT_ID = "G-PXFLDZYHCP"
 
 
 def analytics_snippet():

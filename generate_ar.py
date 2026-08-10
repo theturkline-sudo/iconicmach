@@ -6,7 +6,7 @@ domain = "https://iconicmach.com"
 # Google Analytics 4 — يجب أن يطابق المعرّف الموجود في generate_en.py
 # Paste the same Measurement ID used in generate_en.py ("G-XXXXXXXXXX").
 # Leave empty to emit no tracking code.
-GA_MEASUREMENT_ID = ""
+GA_MEASUREMENT_ID = "G-PXFLDZYHCP"
 
 
 def analytics_snippet():

@@ -50,16 +50,30 @@ domain and no SMTP credentials — there is no "from address" to configure.
 length caps and the honeypot run server-side, and the access key never appears
 in page HTML.
 
-### 2. Google Analytics 4 — optional
+### 2. Google Analytics 4 — done, verify after deploy
 
-1. Analytics → **Admin → Data streams → Add stream → Web** → `https://iconicmach.com`
-2. Copy the Measurement ID (format `G-XXXXXXXXXX`)
-3. Set `GA_MEASUREMENT_ID` at the top of **both** `generate_en.py` and
-   `generate_ar.py` to that value
-4. Regenerate and deploy
+Already configured. No action needed unless something looks wrong.
 
-While the value is empty, no tracking code is emitted at all. The snippet sets
-`anonymize_ip: true`.
+| | |
+|---|---|
+| Google account | `theturkline@gmail.com` |
+| Analytics account | Iconic Mach Engineering |
+| Property | `iconicmach.com` (Egypt time, EGP) |
+| Stream | Iconic Mach Website — `https://iconicmach.com` |
+| Measurement ID | `G-PXFLDZYHCP` |
+
+`GA_MEASUREMENT_ID` is set in both generators, so the tag is on all 36 pages
+with `anonymize_ip: true`. Data-sharing with Google for its own product and
+marketing purposes was left off.
+
+**Verify once deployed:** visit the live site, then check
+Analytics → Reports → Realtime. Nothing appeared during local testing, which is
+normal for a property created minutes earlier — Google warns collection can take
+up to 48 hours to start. The tag itself was confirmed working: the page_view hit
+was accepted by Google with HTTP 204.
+
+Business size was set to "Medium (11-100 employees)" as a guess — correct it in
+Admin → Property details if wrong. It only affects Google's benchmarking.
 
 ### 3. Blog articles are drafts
 
