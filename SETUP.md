@@ -28,27 +28,37 @@ both generators, plus `PAGES` in `generate_sitemap.py`.
 
 ## Outstanding setup steps
 
-### 1. Web3Forms access key — required, forms are broken without it
+### 1. Web3Forms — done, no action needed
 
-Inquiry emails are delivered by [Web3Forms](https://web3forms.com). Mail goes to
-whichever inbox owns the access key, so the key **must** be created using
-`sales@iconicmach.com`.
+Inquiry emails are delivered by [Web3Forms](https://web3forms.com) to the inbox
+that owns the access key (`sales@iconicmach.com`).
 
-1. Go to <https://web3forms.com>, enter `sales@iconicmach.com`
-2. Check that inbox for the access key
-3. Cloudflare dashboard → your Pages project → **Settings → Environment variables**
-4. Add `WEB3FORMS_ACCESS_KEY` = the key, to **both Production and Preview**
-5. Redeploy
+Access key: `8fdf1126-4ed7-4dc6-aea5-6714b12d50ad`, set as
+`WEB3FORMS_ACCESS_KEY` in both generators.
 
-Until this is set, the form shows the visitor a clear error and writes the
-submission to the Worker logs, so nothing is silently lost.
+**The key is in the page HTML on purpose.** Web3Forms states it is public and
+safe in client code — the worst it permits is sending mail to the address that
+owns it. There is no Cloudflare environment variable and no server-side secret.
 
-Web3Forms was chosen over Resend/SMTP because it needs no verified sending
-domain and no SMTP credentials — there is no "from address" to configure.
+**Why the form posts straight from the browser:** Web3Forms rejects server-side
+calls on the free plan —
 
-**Why the Function proxies instead of the browser posting directly:** validation,
-length caps and the honeypot run server-side, and the access key never appears
-in page HTML.
+> This method is not allowed. Use our API in client side or contact support
+> with server IP address (Pro plan is required)
+
+An earlier design proxied through a Cloudflare Pages Function to keep the key
+private; it was removed because it could never have worked. `functions/` no
+longer exists.
+
+**Spam protection.** A hidden `botcheck` field (Web3Forms' native honeypot) is
+in both forms; when filled, `forms.js` skips the network call entirely and
+shows a fake success so the bot does not retry. Web3Forms also runs its own
+spam filtering. If spam ever becomes a problem, the next step is Cloudflare
+Turnstile, which Web3Forms supports natively and is free.
+
+Verified end to end on 10 August 2026: EN contact form and AR quotation form
+both submitted successfully through the real handler, and the honeypot path
+made zero network calls.
 
 ### 2. Google Analytics 4 — done, verify after deploy
 
@@ -93,10 +103,11 @@ python -m http.server 8788
 
 Then open <http://localhost:8788/en/> or <http://localhost:8788/ar/>.
 
-Note that `python -m http.server` does not handle POST, so form submissions
-return 501 locally. That is expected — the form is only fully testable on a
-Cloudflare deployment, where the Pages Function runs. To test Functions
-locally instead, use `npx wrangler pages dev .`.
+Forms work locally, since they post directly to Web3Forms rather than to a
+local endpoint. Be aware that browsers cache `assets/`, so after changing CSS
+or JS you may keep running the old file — bump `ASSET_VERSION` in both
+generators (it appends `?v=N` to every local CSS/JS URL) and regenerate. That
+same mechanism stops returning visitors running stale assets after a deploy.
 
 ## Deploy
 

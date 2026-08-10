@@ -1,7 +1,14 @@
 // assets/js/forms.js
 // Handles every inquiry form on the site (contact + request-quotation, EN + AR).
+//
+// Submissions go straight from the browser to Web3Forms. This is deliberate:
+// Web3Forms rejects server-side calls on the free plan ("This method is not
+// allowed. Use our API in client side..."), so proxying through a Cloudflare
+// Function does not work. The access key is public by design — Web3Forms
+// states it is safe in client code, since the worst it allows is sending mail
+// to the address that owns it.
 
-document.addEventListener('DOMContentLoaded', initForms);
+const ENDPOINT = 'https://api.web3forms.com/submit';
 
 const STRINGS = {
     en: {
@@ -20,9 +27,19 @@ const STRINGS = {
     }
 };
 
-function initForms() {
+const LABELS = {
+    en: { phone: 'Phone', company: 'Company', product: 'Product / Service', form: 'Form', page: 'Submitted from' },
+    ar: { phone: 'الهاتف', company: 'الشركة', product: 'المنتج / الخدمة', form: 'النموذج', page: 'أُرسل من' }
+};
+
+const FORM_LABEL = {
+    en: { contact: 'Contact Inquiry', quotation: 'Quotation Request' },
+    ar: { contact: 'استفسار', quotation: 'طلب عرض سعر' }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('form.inquiry-form').forEach(setupForm);
-}
+});
 
 function setupForm(form) {
     const lang = document.documentElement.lang === 'ar' ? 'ar' : 'en';
@@ -33,18 +50,27 @@ function setupForm(form) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const data = Object.fromEntries(new FormData(form).entries());
+        const f = Object.fromEntries(new FormData(form).entries());
 
-        if (!data.name || !data.email || !data.message) {
+        // Honeypot — bots fill hidden fields, humans never see them.
+        // Report success so the bot does not retry.
+        if (f.botcheck) {
+            form.reset();
+            return showStatus(statusEl, t.success, 'success');
+        }
+
+        if (!f.name || !f.email || !f.message) {
             return showStatus(statusEl, t.required, 'error');
         }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) {
             return showStatus(statusEl, t.badEmail, 'error');
         }
 
-        data.form_type = form.dataset.formType || 'contact';
-        data.language = lang;
-        data.page = window.location.pathname;
+        const key = (document.querySelector('meta[name="web3forms-key"]') || {}).content;
+        if (!key) {
+            console.error('web3forms-key meta tag is missing — cannot submit.');
+            return showStatus(statusEl, t.failure, 'error');
+        }
 
         const originalText = submitBtn.textContent;
         submitBtn.textContent = t.sending;
@@ -52,16 +78,20 @@ function setupForm(form) {
         showStatus(statusEl, '', 'clear');
 
         try {
-            const response = await fetch('/api/submit-inquiry', {
+            const res = await fetch(ENDPOINT, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify(buildPayload(form, f, key, lang))
             });
+            const body = await res.json().catch(() => ({}));
 
-            if (response.ok) {
+            // Web3Forms can answer 200 with success:false (e.g. rejected key),
+            // so status alone is not enough.
+            if (res.ok && body.success !== false) {
                 form.reset();
                 showStatus(statusEl, t.success, 'success');
             } else {
+                console.error('Web3Forms rejected the submission:', res.status, body);
                 showStatus(statusEl, t.failure, 'error');
             }
         } catch (error) {
@@ -72,6 +102,36 @@ function setupForm(form) {
             submitBtn.disabled = false;
         }
     });
+}
+
+function buildPayload(form, f, key, lang) {
+    const type = form.dataset.formType === 'quotation' ? 'quotation' : 'contact';
+    const label = FORM_LABEL[lang][type];
+    const L = LABELS[lang];
+
+    const payload = {
+        access_key: key,
+        from_name: 'Iconic Mach Website',
+        subject: `[${label}] ${f.subject || f.name}${f.company ? ' — ' + f.company : ''}`,
+        replyto: f.email,
+        name: f.name,
+        email: f.email,
+        message: f.message
+    };
+
+    // Web3Forms emails every key it receives, so use readable labels and skip blanks.
+    const extras = {
+        [L.phone]: f.phone,
+        [L.company]: f.company,
+        [L.product]: f.product,
+        [L.form]: label,
+        [L.page]: window.location.pathname
+    };
+    for (const [k, v] of Object.entries(extras)) {
+        if (v) payload[k] = v;
+    }
+
+    return payload;
 }
 
 function showStatus(el, message, kind) {

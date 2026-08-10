@@ -8,6 +8,14 @@ domain = "https://iconicmach.com"
 # Leave empty to emit no tracking code.
 GA_MEASUREMENT_ID = "G-PXFLDZYHCP"
 
+# مفتاح Web3Forms العام — Web3Forms يمنع الإرسال من الخادم في الخطة المجانية،
+# لذلك يُرسل النموذج من المتصفح مباشرةً.
+WEB3FORMS_ACCESS_KEY = "8fdf1126-4ed7-4dc6-aea5-6714b12d50ad"
+
+# Bump when any file in assets/css or assets/js changes, so returning visitors
+# do not run a stale cached script against newly generated HTML.
+ASSET_VERSION = "2"
+
 
 def analytics_snippet():
     if not GA_MEASUREMENT_ID:
@@ -406,14 +414,14 @@ pages = {
                     </div>
                 </div>
                 <div>
-                    <form id="contact-form" class="inquiry-form card bg-main" data-form-type="contact" method="POST" action="/api/submit-inquiry" style="display:flex;flex-direction:column;gap:18px;padding:40px;box-shadow:var(--shadow-md);">
+                    <form id="contact-form" class="inquiry-form card bg-main" data-form-type="contact" method="POST" action="https://api.web3forms.com/submit" style="display:flex;flex-direction:column;gap:18px;padding:40px;box-shadow:var(--shadow-md);">
                         <h3 style="margin-bottom:8px;">أرسل لنا رسالة</h3>
                         <input type="text" id="name" name="name" autocomplete="name" placeholder="الاسم الكامل *" aria-label="الاسم الكامل" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
                         <input type="email" id="email" name="email" autocomplete="email" placeholder="البريد الإلكتروني *" aria-label="البريد الإلكتروني" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
                         <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="رقم الهاتف" aria-label="رقم الهاتف" style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
                         <input type="text" id="subject" name="subject" placeholder="الموضوع *" aria-label="الموضوع" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
                         <textarea id="message" name="message" placeholder="أخبرنا عن مشروعك... *" aria-label="الرسالة" rows="5" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);resize:vertical;"></textarea>
-                        <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+                        <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
                         <div class="form-status" role="status" aria-live="polite" hidden></div>
                         <button type="submit" class="btn btn-primary" style="padding:14px;font-weight:600;border:none;cursor:pointer;font-size:1rem;">إرسال الرسالة</button>
                     </form>
@@ -506,7 +514,7 @@ pages = {
     <section id="main-content" class="section">
         <div class="container" style="max-width:700px;">
             <p style="text-align:center;line-height:1.8;margin-bottom:40px;color:var(--text-muted);">املأ النموذج أدناه وسيتواصل معك فريق المبيعات خلال يوم عمل واحد بعرض سعر تفصيلي ومنافس.</p>
-            <form id="quotation-form" class="inquiry-form card bg-main" data-form-type="quotation" method="POST" action="/api/submit-inquiry" style="display:flex;flex-direction:column;gap:18px;padding:40px;box-shadow:var(--shadow-md);">
+            <form id="quotation-form" class="inquiry-form card bg-main" data-form-type="quotation" method="POST" action="https://api.web3forms.com/submit" style="display:flex;flex-direction:column;gap:18px;padding:40px;box-shadow:var(--shadow-md);">
                 <input type="text" id="name" name="name" autocomplete="name" placeholder="الاسم الكامل *" aria-label="الاسم الكامل" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
                 <input type="text" id="company" name="company" autocomplete="organization" placeholder="اسم الشركة" aria-label="اسم الشركة" style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
                 <input type="email" id="email" name="email" autocomplete="email" placeholder="البريد الإلكتروني *" aria-label="البريد الإلكتروني" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
@@ -521,7 +529,7 @@ pages = {
                     <option>أخرى</option>
                 </select>
                 <textarea id="message" name="message" placeholder="صف متطلبات مشروعك... *" aria-label="متطلبات المشروع" rows="6" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);resize:vertical;"></textarea>
-                <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+                <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
                 <div class="form-status" role="status" aria-live="polite" hidden></div>
                 <button type="submit" class="btn btn-primary" style="padding:14px;font-weight:600;border:none;cursor:pointer;font-size:1rem;">إرسال طلب عرض السعر</button>
             </form>
@@ -825,13 +833,14 @@ template = """<!DOCTYPE html>
     <meta name="theme-color" content="#0a3150">
     <link rel="manifest" href="../site.webmanifest">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <meta name="web3forms-key" content="{web3forms_key}">
     <script type="application/ld+json">{schema}</script>
     {analytics}
-    <link rel="stylesheet" href="../assets/css/variables.css">
-    <link rel="stylesheet" href="../assets/css/reset.css">
-    <link rel="stylesheet" href="../assets/css/layout.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
-    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/variables.css?v={asset_version}">
+    <link rel="stylesheet" href="../assets/css/reset.css?v={asset_version}">
+    <link rel="stylesheet" href="../assets/css/layout.css?v={asset_version}">
+    <link rel="stylesheet" href="../assets/css/components.css?v={asset_version}">
+    <link rel="stylesheet" href="../assets/css/animations.css?v={asset_version}">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         @keyframes bounceDown {{
@@ -890,9 +899,9 @@ template = """<!DOCTYPE html>
     </main>
 
     {footer}
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/animations.js"></script>
-    <script src="../assets/js/forms.js"></script>
+    <script src="../assets/js/main.js?v={asset_version}"></script>
+    <script src="../assets/js/animations.js?v={asset_version}"></script>
+    <script src="../assets/js/forms.js?v={asset_version}"></script>
 </body>
 </html>"""
 
@@ -910,6 +919,8 @@ for filename, (title, description, content) in pages.items():
             hero=hero,
             footer=FOOTER,
             schema=build_schema(filename, title, description),
-            analytics=analytics_snippet()
+            analytics=analytics_snippet(),
+            web3forms_key=WEB3FORMS_ACCESS_KEY,
+            asset_version=ASSET_VERSION
         ))
 print("Arabic pages generated successfully.")

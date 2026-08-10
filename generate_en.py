@@ -8,6 +8,14 @@ domain = "https://iconicmach.com"
 # script. Leave it empty and no tracking code is emitted at all.
 GA_MEASUREMENT_ID = "G-PXFLDZYHCP"
 
+# Web3Forms access key (public by design — Web3Forms blocks server-side
+# submissions on the free plan, so the form posts from the browser).
+WEB3FORMS_ACCESS_KEY = "8fdf1126-4ed7-4dc6-aea5-6714b12d50ad"
+
+# Bump when any file in assets/css or assets/js changes, so returning visitors
+# do not run a stale cached script against newly generated HTML.
+ASSET_VERSION = "2"
+
 
 def analytics_snippet():
     if not GA_MEASUREMENT_ID:
@@ -458,14 +466,14 @@ pages = {
                     </div>
                 </div>
                 <div>
-                    <form id="contact-form" class="inquiry-form card bg-main" data-form-type="contact" method="POST" action="/api/submit-inquiry" style="display:flex; flex-direction:column; gap:18px; padding:40px; box-shadow:var(--shadow-md);">
+                    <form id="contact-form" class="inquiry-form card bg-main" data-form-type="contact" method="POST" action="https://api.web3forms.com/submit" style="display:flex; flex-direction:column; gap:18px; padding:40px; box-shadow:var(--shadow-md);">
                         <h3 style="margin-bottom:8px;">Send us a Message</h3>
                         <input type="text" id="name" name="name" autocomplete="name" placeholder="Your Name *" aria-label="Your Name" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
                         <input type="email" id="email" name="email" autocomplete="email" placeholder="Your Email *" aria-label="Your Email" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
                         <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Phone Number" aria-label="Phone Number" style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
                         <input type="text" id="subject" name="subject" placeholder="Subject *" aria-label="Subject" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
                         <textarea id="message" name="message" placeholder="Tell us about your project... *" aria-label="Message" rows="5" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt); resize:vertical;"></textarea>
-                        <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; opacity:0; height:0; width:0;">
+                        <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; opacity:0; height:0; width:0;">
                         <div class="form-status" role="status" aria-live="polite" hidden></div>
                         <button type="submit" class="btn btn-primary" style="padding:14px; font-weight:600; border:none; cursor:pointer; font-size:1rem;">Send Message</button>
                     </form>
@@ -602,7 +610,7 @@ pages = {
     <section id="main-content" class="section">
         <div class="container" style="max-width:700px;">
             <p style="text-align:center; line-height:1.8; margin-bottom:40px; color:var(--text-muted);">Fill in the form below and our sales team will get back to you within one business day with a detailed, competitive quotation.</p>
-            <form id="quotation-form" class="inquiry-form card bg-main" data-form-type="quotation" method="POST" action="/api/submit-inquiry" style="display:flex; flex-direction:column; gap:18px; padding:40px; box-shadow:var(--shadow-md);">
+            <form id="quotation-form" class="inquiry-form card bg-main" data-form-type="quotation" method="POST" action="https://api.web3forms.com/submit" style="display:flex; flex-direction:column; gap:18px; padding:40px; box-shadow:var(--shadow-md);">
                 <input type="text" id="name" name="name" autocomplete="name" placeholder="Full Name *" aria-label="Full Name" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
                 <input type="text" id="company" name="company" autocomplete="organization" placeholder="Company Name" aria-label="Company Name" style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
                 <input type="email" id="email" name="email" autocomplete="email" placeholder="Email Address *" aria-label="Email Address" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
@@ -617,7 +625,7 @@ pages = {
                     <option>Other</option>
                 </select>
                 <textarea id="message" name="message" placeholder="Describe your project requirements... *" aria-label="Project requirements" rows="6" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt); resize:vertical;"></textarea>
-                <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; opacity:0; height:0; width:0;">
+                <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; opacity:0; height:0; width:0;">
                 <div class="form-status" role="status" aria-live="polite" hidden></div>
                 <button type="submit" class="btn btn-primary" style="padding:14px; font-weight:600; border:none; cursor:pointer; font-size:1rem;">Submit Quotation Request</button>
             </form>
@@ -935,13 +943,14 @@ template = """<!DOCTYPE html>
     <meta name="theme-color" content="#0a3150">
     <link rel="manifest" href="../site.webmanifest">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <meta name="web3forms-key" content="{web3forms_key}">
     <script type="application/ld+json">{schema}</script>
     {analytics}
-    <link rel="stylesheet" href="../assets/css/variables.css">
-    <link rel="stylesheet" href="../assets/css/reset.css">
-    <link rel="stylesheet" href="../assets/css/layout.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
-    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/variables.css?v={asset_version}">
+    <link rel="stylesheet" href="../assets/css/reset.css?v={asset_version}">
+    <link rel="stylesheet" href="../assets/css/layout.css?v={asset_version}">
+    <link rel="stylesheet" href="../assets/css/components.css?v={asset_version}">
+    <link rel="stylesheet" href="../assets/css/animations.css?v={asset_version}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         @keyframes bounceDown {{
@@ -1001,9 +1010,9 @@ template = """<!DOCTYPE html>
     </main>
 
     {footer}
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/animations.js"></script>
-    <script src="../assets/js/forms.js"></script>
+    <script src="../assets/js/main.js?v={asset_version}"></script>
+    <script src="../assets/js/animations.js?v={asset_version}"></script>
+    <script src="../assets/js/forms.js?v={asset_version}"></script>
 </body>
 </html>"""
 
@@ -1021,6 +1030,8 @@ for filename, (title, description, content) in pages.items():
             hero=hero,
             footer=FOOTER,
             schema=build_schema(filename, title, description),
-            analytics=analytics_snippet()
+            analytics=analytics_snippet(),
+            web3forms_key=WEB3FORMS_ACCESS_KEY,
+            asset_version=ASSET_VERSION
         ))
 print("English pages generated successfully.")
