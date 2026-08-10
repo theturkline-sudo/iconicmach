@@ -1,66 +1,274 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <!-- Arabic Pages -->
-  <url>
-    <loc>https://iconicmach.com/ar/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/" />
-  </url>
-  <url>
-    <loc>https://iconicmach.com/ar/about.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/about.html" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/about.html" />
-  </url>
-  <url>
-    <loc>https://iconicmach.com/ar/production-lines.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/production-lines.html" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/production-lines.html" />
-  </url>
-  <url>
-    <loc>https://iconicmach.com/ar/conveyor-systems.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/conveyor-systems.html" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/conveyor-systems.html" />
-  </url>
-  <url>
-    <loc>https://iconicmach.com/ar/services.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/services.html" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/services.html" />
-  </url>
-  <url>
-    <loc>https://iconicmach.com/ar/contact.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/contact.html" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/contact.html" />
-  </url>
-  
-  <!-- English Pages -->
-  <url>
-    <loc>https://iconicmach.com/en/</loc>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/" />
-  </url>
-  <url>
-    <loc>https://iconicmach.com/en/about.html</loc>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/about.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/about.html" />
-  </url>
-  <url>
-    <loc>https://iconicmach.com/en/production-lines.html</loc>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/production-lines.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/production-lines.html" />
-  </url>
-  <url>
-    <loc>https://iconicmach.com/en/conveyor-systems.html</loc>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/conveyor-systems.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/conveyor-systems.html" />
-  </url>
-  <url>
-    <loc>https://iconicmach.com/en/services.html</loc>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/services.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/services.html" />
-  </url>
-  <url>
-    <loc>https://iconicmach.com/en/contact.html</loc>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/contact.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/contact.html" />
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://iconicmach.com/ar/</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/production-lines.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/production-lines.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/production-lines.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/production-lines.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/conveyor-systems.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/conveyor-systems.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/conveyor-systems.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/conveyor-systems.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/services.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/services.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/services.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/services.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/industries.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/industries.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/industries.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/industries.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/spare-parts.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/spare-parts.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/spare-parts.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/spare-parts.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/technical-support.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/technical-support.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/technical-support.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/technical-support.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/request-quotation.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/request-quotation.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/request-quotation.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/request-quotation.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/projects.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/projects.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/projects.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/projects.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/about.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/about.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/about.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/about.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/contact.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/contact.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/contact.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/contact.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/blog.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/blog.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/faq.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/faq.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/faq.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/faq.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/privacy-policy.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/privacy-policy.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/privacy-policy.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/privacy-policy.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/terms.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/terms.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/terms.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/terms.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/production-lines.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/production-lines.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/production-lines.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/production-lines.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/conveyor-systems.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/conveyor-systems.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/conveyor-systems.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/conveyor-systems.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/services.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/services.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/services.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/services.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/industries.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/industries.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/industries.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/industries.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/spare-parts.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/spare-parts.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/spare-parts.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/spare-parts.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/technical-support.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/technical-support.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/technical-support.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/technical-support.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/request-quotation.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/request-quotation.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/request-quotation.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/request-quotation.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/projects.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/projects.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/projects.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/projects.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/about.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/about.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/about.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/about.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/contact.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/contact.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/contact.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/contact.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/blog.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/blog.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/faq.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/faq.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/faq.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/faq.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/privacy-policy.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/privacy-policy.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/privacy-policy.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/privacy-policy.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/terms.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/terms.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/terms.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/terms.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
 </urlset>

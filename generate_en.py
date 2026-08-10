@@ -1,6 +1,80 @@
+import json
 import os
 
 domain = "https://iconicmach.com"
+
+ORGANIZATION = {
+    "@type": "Organization",
+    "@id": domain + "/#organization",
+    "name": "Iconic Mach Engineering",
+    "alternateName": "آيكونيك ماشين الهندسية",
+    "url": domain + "/",
+    "logo": domain + "/assets/images/iconicmach.png",
+    "image": domain + "/assets/images/iconicmach.png",
+    "description": "Design, manufacture and installation of production lines, conveyor systems and industrial automation across Egypt and the GCC.",
+    "email": "sales@iconicmach.com",
+    "telephone": "+20-108-472-717",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Shams Mall, 10th of Ramadan City",
+        "addressRegion": "Al Sharqiya",
+        "addressCountry": "EG",
+    },
+    "areaServed": ["EG", "SA", "AE", "KW", "QA", "OM", "BH"],
+    "sameAs": [
+        "https://www.instagram.com/iconic.mach/",
+        "https://www.tiktok.com/@iconicmach",
+        "https://www.facebook.com/profile.php?id=61590558549282",
+        "https://www.linkedin.com/in/mahmoud-turk-82bbb8412/",
+        "https://www.youtube.com/@Iconicmach",
+    ],
+    "contactPoint": [
+        {
+            "@type": "ContactPoint",
+            "contactType": "sales",
+            "telephone": "+20-108-472-717",
+            "email": "sales@iconicmach.com",
+            "availableLanguage": ["en", "ar"],
+        },
+        {
+            "@type": "ContactPoint",
+            "contactType": "technical support",
+            "email": "technical@iconicmach.com",
+            "availableLanguage": ["en", "ar"],
+        },
+    ],
+}
+
+
+def build_schema(filename, title, description):
+    """JSON-LD graph: the Organization plus a WebPage node for this page."""
+    url = "{}/en/{}".format(domain, "" if filename == "index.html" else filename)
+    graph = [
+        ORGANIZATION,
+        {
+            "@type": "WebSite",
+            "@id": domain + "/#website",
+            "url": domain + "/",
+            "name": "Iconic Mach Engineering",
+            "inLanguage": "en",
+            "publisher": {"@id": domain + "/#organization"},
+        },
+        {
+            "@type": "WebPage",
+            "@id": url + "#webpage",
+            "url": url,
+            "name": title + " | Iconic Mach Engineering",
+            "description": description,
+            "inLanguage": "en",
+            "isPartOf": {"@id": domain + "/#website"},
+            "about": {"@id": domain + "/#organization"},
+        },
+    ]
+    return json.dumps(
+        {"@context": "https://schema.org", "@graph": graph},
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
 
 # Hero section per page: (bg_image_or_video, title, subtitle)
 page_heroes = {
@@ -346,13 +420,15 @@ pages = {
                     </div>
                 </div>
                 <div>
-                    <form action="#" method="POST" class="card bg-main" style="display:flex; flex-direction:column; gap:18px; padding:40px; box-shadow:var(--shadow-md);">
+                    <form id="contact-form" class="inquiry-form card bg-main" data-form-type="contact" method="POST" action="/api/submit-inquiry" style="display:flex; flex-direction:column; gap:18px; padding:40px; box-shadow:var(--shadow-md);">
                         <h3 style="margin-bottom:8px;">Send us a Message</h3>
-                        <input type="text" placeholder="Your Name" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
-                        <input type="email" placeholder="Your Email" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
-                        <input type="tel" placeholder="Phone Number" style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
-                        <input type="text" placeholder="Subject" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
-                        <textarea placeholder="Tell us about your project..." rows="5" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt); resize:vertical;"></textarea>
+                        <input type="text" id="name" name="name" autocomplete="name" placeholder="Your Name *" aria-label="Your Name" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
+                        <input type="email" id="email" name="email" autocomplete="email" placeholder="Your Email *" aria-label="Your Email" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
+                        <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Phone Number" aria-label="Phone Number" style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
+                        <input type="text" id="subject" name="subject" placeholder="Subject *" aria-label="Subject" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt);">
+                        <textarea id="message" name="message" placeholder="Tell us about your project... *" aria-label="Message" rows="5" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; background:var(--bg-alt); resize:vertical;"></textarea>
+                        <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; opacity:0; height:0; width:0;">
+                        <div class="form-status" role="status" aria-live="polite" hidden></div>
                         <button type="submit" class="btn btn-primary" style="padding:14px; font-weight:600; border:none; cursor:pointer; font-size:1rem;">Send Message</button>
                     </form>
                 </div>
@@ -488,12 +564,12 @@ pages = {
     <section id="main-content" class="section">
         <div class="container" style="max-width:700px;">
             <p style="text-align:center; line-height:1.8; margin-bottom:40px; color:var(--text-muted);">Fill in the form below and our sales team will get back to you within one business day with a detailed, competitive quotation.</p>
-            <form action="#" method="POST" class="card bg-main" style="display:flex; flex-direction:column; gap:18px; padding:40px; box-shadow:var(--shadow-md);">
-                <input type="text" placeholder="Full Name" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
-                <input type="text" placeholder="Company Name" style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
-                <input type="email" placeholder="Email Address" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
-                <input type="tel" placeholder="Phone / WhatsApp" style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
-                <select style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
+            <form id="quotation-form" class="inquiry-form card bg-main" data-form-type="quotation" method="POST" action="/api/submit-inquiry" style="display:flex; flex-direction:column; gap:18px; padding:40px; box-shadow:var(--shadow-md);">
+                <input type="text" id="name" name="name" autocomplete="name" placeholder="Full Name *" aria-label="Full Name" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
+                <input type="text" id="company" name="company" autocomplete="organization" placeholder="Company Name" aria-label="Company Name" style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="Email Address *" aria-label="Email Address" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
+                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Phone / WhatsApp" aria-label="Phone or WhatsApp" style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
+                <select id="product" name="product" aria-label="Product or Service Required" style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt);">
                     <option value="">Product / Service Required</option>
                     <option>Production Line</option>
                     <option>Conveyor System</option>
@@ -502,7 +578,9 @@ pages = {
                     <option>Spare Parts</option>
                     <option>Other</option>
                 </select>
-                <textarea placeholder="Describe your project requirements..." rows="6" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt); resize:vertical;"></textarea>
+                <textarea id="message" name="message" placeholder="Describe your project requirements... *" aria-label="Project requirements" rows="6" required style="padding:13px 16px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; background:var(--bg-alt); resize:vertical;"></textarea>
+                <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; opacity:0; height:0; width:0;">
+                <div class="form-status" role="status" aria-live="polite" hidden></div>
                 <button type="submit" class="btn btn-primary" style="padding:14px; font-weight:600; border:none; cursor:pointer; font-size:1rem;">Submit Quotation Request</button>
             </form>
         </div>
@@ -596,11 +674,26 @@ template = """<!DOCTYPE html>
     <title>{title} | Iconic Mach Engineering</title>
     <meta name="description" content="{description}">
     <link rel="canonical" href="{domain}/en/{filename}">
+    <link rel="alternate" hreflang="en" href="{domain}/en/{filename}">
+    <link rel="alternate" hreflang="ar" href="{domain}/ar/{filename}">
+    <link rel="alternate" hreflang="x-default" href="{domain}/en/{filename}">
+    <meta property="og:site_name" content="Iconic Mach Engineering">
     <meta property="og:title" content="{title} | Iconic Mach Engineering">
     <meta property="og:description" content="{description}">
     <meta property="og:url" content="{domain}/en/{filename}">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ar_EG">
+    <meta property="og:image" content="{domain}/assets/images/iconicmach.png">
+    <meta property="og:image:alt" content="Iconic Mach Engineering">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{title} | Iconic Mach Engineering">
+    <meta name="twitter:description" content="{description}">
+    <meta name="twitter:image" content="{domain}/assets/images/iconicmach.png">
+    <meta name="theme-color" content="#0a3150">
+    <link rel="manifest" href="../site.webmanifest">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <script type="application/ld+json">{schema}</script>
     <link rel="stylesheet" href="../assets/css/variables.css">
     <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="../assets/css/layout.css">
@@ -667,6 +760,7 @@ template = """<!DOCTYPE html>
     {footer}
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/animations.js"></script>
+    <script src="../assets/js/forms.js"></script>
 </body>
 </html>"""
 
@@ -682,6 +776,7 @@ for filename, (title, description, content) in pages.items():
             filename=filename,
             content=content,
             hero=hero,
-            footer=FOOTER
+            footer=FOOTER,
+            schema=build_schema(filename, title, description)
         ))
 print("English pages generated successfully.")

@@ -1,6 +1,81 @@
+import json
 import os
 
 domain = "https://iconicmach.com"
+
+ORGANIZATION = {
+    "@type": "Organization",
+    "@id": domain + "/#organization",
+    "name": "آيكونيك ماشين الهندسية",
+    "alternateName": "Iconic Mach Engineering",
+    "url": domain + "/",
+    "logo": domain + "/assets/images/iconicmach.png",
+    "image": domain + "/assets/images/iconicmach.png",
+    "description": "تصميم وتصنيع وتركيب خطوط الإنتاج وأنظمة السيور الناقلة والأتمتة الصناعية في مصر ودول الخليج.",
+    "email": "sales@iconicmach.com",
+    "telephone": "+20-108-472-717",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "مول شمس، العاشر من رمضان",
+        "addressRegion": "الشرقية",
+        "addressCountry": "EG",
+    },
+    "areaServed": ["EG", "SA", "AE", "KW", "QA", "OM", "BH"],
+    "sameAs": [
+        "https://www.instagram.com/iconic.mach/",
+        "https://www.tiktok.com/@iconicmach",
+        "https://www.facebook.com/profile.php?id=61590558549282",
+        "https://www.linkedin.com/in/mahmoud-turk-82bbb8412/",
+        "https://www.youtube.com/@Iconicmach",
+    ],
+    "contactPoint": [
+        {
+            "@type": "ContactPoint",
+            "contactType": "sales",
+            "telephone": "+20-108-472-717",
+            "email": "sales@iconicmach.com",
+            "availableLanguage": ["ar", "en"],
+        },
+        {
+            "@type": "ContactPoint",
+            "contactType": "technical support",
+            "email": "technical@iconicmach.com",
+            "availableLanguage": ["ar", "en"],
+        },
+    ],
+}
+
+
+def build_schema(filename, title, description):
+    """JSON-LD graph: the Organization plus a WebPage node for this page."""
+    url = "{}/ar/{}".format(domain, "" if filename == "index.html" else filename)
+    graph = [
+        ORGANIZATION,
+        {
+            "@type": "WebSite",
+            "@id": domain + "/#website",
+            "url": domain + "/",
+            "name": "آيكونيك ماشين الهندسية",
+            "inLanguage": "ar",
+            "publisher": {"@id": domain + "/#organization"},
+        },
+        {
+            "@type": "WebPage",
+            "@id": url + "#webpage",
+            "url": url,
+            "name": title + " | آيكونيك ماشين الهندسية",
+            "description": description,
+            "inLanguage": "ar",
+            "isPartOf": {"@id": domain + "/#website"},
+            "about": {"@id": domain + "/#organization"},
+        },
+    ]
+    return json.dumps(
+        {"@context": "https://schema.org", "@graph": graph},
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+
 
 page_heroes = {
     'index.html':              ('video', '../assets/videos/full line.mp4', 'رواد الهندسة الصناعية', 'نصمم وننتج ونركب خطوط إنتاج عالمية المستوى في مصر ودول الخليج.'),
@@ -293,13 +368,15 @@ pages = {
                     </div>
                 </div>
                 <div>
-                    <form action="#" method="POST" class="card bg-main" style="display:flex;flex-direction:column;gap:18px;padding:40px;box-shadow:var(--shadow-md);">
+                    <form id="contact-form" class="inquiry-form card bg-main" data-form-type="contact" method="POST" action="/api/submit-inquiry" style="display:flex;flex-direction:column;gap:18px;padding:40px;box-shadow:var(--shadow-md);">
                         <h3 style="margin-bottom:8px;">أرسل لنا رسالة</h3>
-                        <input type="text" placeholder="الاسم الكامل" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
-                        <input type="email" placeholder="البريد الإلكتروني" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
-                        <input type="tel" placeholder="رقم الهاتف" style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
-                        <input type="text" placeholder="الموضوع" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
-                        <textarea placeholder="أخبرنا عن مشروعك..." rows="5" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);resize:vertical;"></textarea>
+                        <input type="text" id="name" name="name" autocomplete="name" placeholder="الاسم الكامل *" aria-label="الاسم الكامل" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
+                        <input type="email" id="email" name="email" autocomplete="email" placeholder="البريد الإلكتروني *" aria-label="البريد الإلكتروني" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
+                        <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="رقم الهاتف" aria-label="رقم الهاتف" style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
+                        <input type="text" id="subject" name="subject" placeholder="الموضوع *" aria-label="الموضوع" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);">
+                        <textarea id="message" name="message" placeholder="أخبرنا عن مشروعك... *" aria-label="الرسالة" rows="5" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;font-size:0.95rem;background:var(--bg-alt);resize:vertical;"></textarea>
+                        <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+                        <div class="form-status" role="status" aria-live="polite" hidden></div>
                         <button type="submit" class="btn btn-primary" style="padding:14px;font-weight:600;border:none;cursor:pointer;font-size:1rem;">إرسال الرسالة</button>
                     </form>
                 </div>
@@ -391,12 +468,12 @@ pages = {
     <section id="main-content" class="section">
         <div class="container" style="max-width:700px;">
             <p style="text-align:center;line-height:1.8;margin-bottom:40px;color:var(--text-muted);">املأ النموذج أدناه وسيتواصل معك فريق المبيعات خلال يوم عمل واحد بعرض سعر تفصيلي ومنافس.</p>
-            <form action="#" method="POST" class="card bg-main" style="display:flex;flex-direction:column;gap:18px;padding:40px;box-shadow:var(--shadow-md);">
-                <input type="text" placeholder="الاسم الكامل" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
-                <input type="text" placeholder="اسم الشركة" style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
-                <input type="email" placeholder="البريد الإلكتروني" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
-                <input type="tel" placeholder="رقم الهاتف / واتساب" style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
-                <select style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
+            <form id="quotation-form" class="inquiry-form card bg-main" data-form-type="quotation" method="POST" action="/api/submit-inquiry" style="display:flex;flex-direction:column;gap:18px;padding:40px;box-shadow:var(--shadow-md);">
+                <input type="text" id="name" name="name" autocomplete="name" placeholder="الاسم الكامل *" aria-label="الاسم الكامل" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
+                <input type="text" id="company" name="company" autocomplete="organization" placeholder="اسم الشركة" aria-label="اسم الشركة" style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="البريد الإلكتروني *" aria-label="البريد الإلكتروني" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
+                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="رقم الهاتف / واتساب" aria-label="رقم الهاتف أو واتساب" style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
+                <select id="product" name="product" aria-label="المنتج أو الخدمة المطلوبة" style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);">
                     <option value="">المنتج / الخدمة المطلوبة</option>
                     <option>خط إنتاج</option>
                     <option>سيور ناقلة</option>
@@ -405,7 +482,9 @@ pages = {
                     <option>قطع غيار</option>
                     <option>أخرى</option>
                 </select>
-                <textarea placeholder="صف متطلبات مشروعك..." rows="6" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);resize:vertical;"></textarea>
+                <textarea id="message" name="message" placeholder="صف متطلبات مشروعك... *" aria-label="متطلبات المشروع" rows="6" required style="padding:13px 16px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-family:inherit;background:var(--bg-alt);resize:vertical;"></textarea>
+                <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+                <div class="form-status" role="status" aria-live="polite" hidden></div>
                 <button type="submit" class="btn btn-primary" style="padding:14px;font-weight:600;border:none;cursor:pointer;font-size:1rem;">إرسال طلب عرض السعر</button>
             </form>
         </div>
@@ -485,11 +564,26 @@ template = """<!DOCTYPE html>
     <title>{title} | آيكونيك ماشين الهندسية</title>
     <meta name="description" content="{description}">
     <link rel="canonical" href="{domain}/ar/{filename}">
+    <link rel="alternate" hreflang="ar" href="{domain}/ar/{filename}">
+    <link rel="alternate" hreflang="en" href="{domain}/en/{filename}">
+    <link rel="alternate" hreflang="x-default" href="{domain}/en/{filename}">
+    <meta property="og:site_name" content="آيكونيك ماشين الهندسية">
     <meta property="og:title" content="{title} | آيكونيك ماشين الهندسية">
     <meta property="og:description" content="{description}">
     <meta property="og:url" content="{domain}/ar/{filename}">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_EG">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="{domain}/assets/images/iconicmach.png">
+    <meta property="og:image:alt" content="آيكونيك ماشين الهندسية">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{title} | آيكونيك ماشين الهندسية">
+    <meta name="twitter:description" content="{description}">
+    <meta name="twitter:image" content="{domain}/assets/images/iconicmach.png">
+    <meta name="theme-color" content="#0a3150">
+    <link rel="manifest" href="../site.webmanifest">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <script type="application/ld+json">{schema}</script>
     <link rel="stylesheet" href="../assets/css/variables.css">
     <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="../assets/css/layout.css">
@@ -555,6 +649,7 @@ template = """<!DOCTYPE html>
     {footer}
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/animations.js"></script>
+    <script src="../assets/js/forms.js"></script>
 </body>
 </html>"""
 
@@ -570,6 +665,7 @@ for filename, (title, description, content) in pages.items():
             filename=filename,
             content=content,
             hero=hero,
-            footer=FOOTER
+            footer=FOOTER,
+            schema=build_schema(filename, title, description)
         ))
 print("Arabic pages generated successfully.")
