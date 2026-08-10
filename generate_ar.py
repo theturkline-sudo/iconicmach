@@ -1,5 +1,6 @@
 import json
 import os
+import re
 
 domain = "https://iconicmach.com"
 
@@ -72,9 +73,28 @@ ORGANIZATION = {
 }
 
 
+def slug_for(filename):
+    """URL path Cloudflare actually serves: index.html -> "", about.html -> about."""
+    return "" if filename == "index.html" else filename[:-len(".html")]
+
+
+def prettify_links(html):
+    """Rewrite internal .html hrefs to the extensionless URLs the server serves.
+
+    Cloudflare's static-asset handling 307-redirects /x.html to /x, so linking
+    to .html cost a redirect hop on every click and made canonical/hreflang
+    point at redirecting URLs. External links are left alone: the character
+    class excludes ':' so "https://..." never matches.
+    """
+    html = re.sub(r'href="index\.html"', 'href="./"', html)
+    html = re.sub(r'href="((?:\.\./)?[a-z]{2}/)index\.html"', r'href="\1"', html)
+    html = re.sub(r'href="([^":]+?)\.html"', r'href="\1"', html)
+    return html
+
+
 def build_schema(filename, title, description):
     """JSON-LD graph: the Organization plus a WebPage node for this page."""
-    url = "{}/ar/{}".format(domain, "" if filename == "index.html" else filename)
+    url = "{}/ar/{}".format(domain, slug_for(filename))
     graph = [
         ORGANIZATION,
         {
@@ -813,14 +833,14 @@ template = """<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title} | آيكونيك ماشين الهندسية</title>
     <meta name="description" content="{description}">
-    <link rel="canonical" href="{domain}/ar/{filename}">
-    <link rel="alternate" hreflang="ar" href="{domain}/ar/{filename}">
-    <link rel="alternate" hreflang="en" href="{domain}/en/{filename}">
-    <link rel="alternate" hreflang="x-default" href="{domain}/en/{filename}">
+    <link rel="canonical" href="{domain}/ar/{slug}">
+    <link rel="alternate" hreflang="ar" href="{domain}/ar/{slug}">
+    <link rel="alternate" hreflang="en" href="{domain}/en/{slug}">
+    <link rel="alternate" hreflang="x-default" href="{domain}/en/{slug}">
     <meta property="og:site_name" content="آيكونيك ماشين الهندسية">
     <meta property="og:title" content="{title} | آيكونيك ماشين الهندسية">
     <meta property="og:description" content="{description}">
-    <meta property="og:url" content="{domain}/ar/{filename}">
+    <meta property="og:url" content="{domain}/ar/{slug}">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ar_EG">
     <meta property="og:locale:alternate" content="en_US">
@@ -887,7 +907,7 @@ template = """<!DOCTYPE html>
             </nav>
             <div class="header-actions">
                 <button id="theme-toggle" class="icon-btn">🌙</button>
-                <a href="../en/{filename}" id="lang-toggle" class="badge">English</a>
+                <a href="../en/{slug}" id="lang-toggle" class="badge">English</a>
                 <div class="menu-toggle"><span></span><span></span><span></span></div>
             </div>
         </div>
@@ -910,7 +930,7 @@ for filename, (title, description, content) in pages.items():
     hero = make_hero(filename)
     filepath = os.path.join('ar', filename)
     with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(template.format(
+        f.write(prettify_links(template.format(
             title=title,
             description=description,
             domain=domain,
@@ -921,6 +941,7 @@ for filename, (title, description, content) in pages.items():
             schema=build_schema(filename, title, description),
             analytics=analytics_snippet(),
             web3forms_key=WEB3FORMS_ACCESS_KEY,
+            slug=slug_for(filename),
             asset_version=ASSET_VERSION
-        ))
+        )))
 print("Arabic pages generated successfully.")

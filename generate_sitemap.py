@@ -31,7 +31,10 @@ PAGES = {
 
 
 def loc(lang, filename):
-    return "{}/{}/{}".format(domain, lang, "" if filename == "index.html" else filename)
+    # Extensionless: Cloudflare 307-redirects /x.html to /x, and a sitemap
+    # should list the destination URL, not one that redirects.
+    slug = "" if filename == "index.html" else filename[: -len(".html")]
+    return "{}/{}/{}".format(domain, lang, slug)
 
 
 def main():

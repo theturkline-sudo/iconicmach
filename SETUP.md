@@ -109,7 +109,19 @@ or JS you may keep running the old file — bump `ASSET_VERSION` in both
 generators (it appends `?v=N` to every local CSS/JS URL) and regenerate. That
 same mechanism stops returning visitors running stale assets after a deploy.
 
+## URLs
+
+The site is served **extensionless**: Cloudflare 307-redirects `/en/contact.html`
+to `/en/contact`. Generators therefore emit extensionless internal links,
+canonical tags, hreflang tags and sitemap entries — `prettify_links()` in each
+generator rewrites `href="x.html"` to `href="x"` (and `index.html` to `./`) on
+the rendered page. Files on disk keep their `.html` names; only the links change.
+
+Do not reintroduce `.html` links: hreflang pointing at a redirecting URL can be
+ignored by Google, and every internal click would cost a redirect hop.
+
 ## Deploy
 
-Pushing to `main` triggers the Cloudflare Pages build. `wrangler.jsonc` serves
-the repository root as static assets, with `functions/` picked up automatically.
+Pushing to `main` triggers a Cloudflare Workers build (the project is
+Git-connected to `theturkline-sudo/iconicmach`). `wrangler.jsonc` serves the
+repository root as static assets.
