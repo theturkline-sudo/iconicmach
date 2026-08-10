@@ -3,6 +3,24 @@ import os
 
 domain = "https://iconicmach.com"
 
+# Google Analytics 4 — يجب أن يطابق المعرّف الموجود في generate_en.py
+# Paste the same Measurement ID used in generate_en.py ("G-XXXXXXXXXX").
+# Leave empty to emit no tracking code.
+GA_MEASUREMENT_ID = ""
+
+
+def analytics_snippet():
+    if not GA_MEASUREMENT_ID:
+        return ""
+    return '''<script async src="https://www.googletagmanager.com/gtag/js?id={gid}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){{dataLayer.push(arguments);}}
+        gtag('js', new Date());
+        gtag('config', '{gid}', {{ anonymize_ip: true }});
+    </script>'''.format(gid=GA_MEASUREMENT_ID)
+
+
 ORGANIZATION = {
     "@type": "Organization",
     "@id": domain + "/#organization",
@@ -808,6 +826,7 @@ template = """<!DOCTYPE html>
     <link rel="manifest" href="../site.webmanifest">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
     <script type="application/ld+json">{schema}</script>
+    {analytics}
     <link rel="stylesheet" href="../assets/css/variables.css">
     <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="../assets/css/layout.css">
@@ -890,6 +909,7 @@ for filename, (title, description, content) in pages.items():
             content=content,
             hero=hero,
             footer=FOOTER,
-            schema=build_schema(filename, title, description)
+            schema=build_schema(filename, title, description),
+            analytics=analytics_snippet()
         ))
 print("Arabic pages generated successfully.")

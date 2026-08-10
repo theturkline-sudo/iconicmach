@@ -3,6 +3,24 @@ import os
 
 domain = "https://iconicmach.com"
 
+# Google Analytics 4 — paste the Measurement ID (looks like "G-XXXXXXXXXX")
+# from Analytics → Admin → Data streams → your web stream, then re-run this
+# script. Leave it empty and no tracking code is emitted at all.
+GA_MEASUREMENT_ID = ""
+
+
+def analytics_snippet():
+    if not GA_MEASUREMENT_ID:
+        return ""
+    return '''<script async src="https://www.googletagmanager.com/gtag/js?id={gid}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){{dataLayer.push(arguments);}}
+        gtag('js', new Date());
+        gtag('config', '{gid}', {{ anonymize_ip: true }});
+    </script>'''.format(gid=GA_MEASUREMENT_ID)
+
+
 ORGANIZATION = {
     "@type": "Organization",
     "@id": domain + "/#organization",
@@ -918,6 +936,7 @@ template = """<!DOCTYPE html>
     <link rel="manifest" href="../site.webmanifest">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
     <script type="application/ld+json">{schema}</script>
+    {analytics}
     <link rel="stylesheet" href="../assets/css/variables.css">
     <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="../assets/css/layout.css">
@@ -1001,6 +1020,7 @@ for filename, (title, description, content) in pages.items():
             content=content,
             hero=hero,
             footer=FOOTER,
-            schema=build_schema(filename, title, description)
+            schema=build_schema(filename, title, description),
+            analytics=analytics_snippet()
         ))
 print("English pages generated successfully.")
