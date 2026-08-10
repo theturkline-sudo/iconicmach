@@ -110,6 +110,33 @@
         <priority>0.6</priority>
     </url>
     <url>
+        <loc>https://iconicmach.com/ar/blog-industry-4-0-egypt.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog-industry-4-0-egypt.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog-industry-4-0-egypt.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/blog-industry-4-0-egypt.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/blog-conveyor-upgrade-signs.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog-conveyor-upgrade-signs.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog-conveyor-upgrade-signs.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/blog-conveyor-upgrade-signs.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/ar/blog-lean-production-line-waste.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog-lean-production-line-waste.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog-lean-production-line-waste.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/blog-lean-production-line-waste.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://iconicmach.com/ar/faq.html</loc>
         <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/faq.html"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/faq.html"/>
@@ -243,6 +270,33 @@
         <lastmod>2026-08-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/blog-industry-4-0-egypt.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog-industry-4-0-egypt.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog-industry-4-0-egypt.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/blog-industry-4-0-egypt.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/blog-conveyor-upgrade-signs.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog-conveyor-upgrade-signs.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog-conveyor-upgrade-signs.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/blog-conveyor-upgrade-signs.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/blog-lean-production-line-waste.html</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog-lean-production-line-waste.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog-lean-production-line-waste.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/blog-lean-production-line-waste.html"/>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://iconicmach.com/en/faq.html</loc>

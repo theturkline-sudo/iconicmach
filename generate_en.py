@@ -70,6 +70,26 @@ def build_schema(filename, title, description):
             "about": {"@id": domain + "/#organization"},
         },
     ]
+
+    article = ARTICLES_BY_FILE.get(filename)
+    if article:
+        graph.append(
+            {
+                "@type": "BlogPosting",
+                "@id": url + "#article",
+                "headline": article["title"],
+                "description": article["excerpt"],
+                "image": domain + "/assets/images/" + article["image"].rsplit("/", 1)[-1],
+                "datePublished": article["date"],
+                "dateModified": article["date"],
+                "articleSection": article["category"].title(),
+                "inLanguage": "en",
+                "mainEntityOfPage": {"@id": url + "#webpage"},
+                "author": {"@id": domain + "/#organization"},
+                "publisher": {"@id": domain + "/#organization"},
+            }
+        )
+
     return json.dumps(
         {"@context": "https://schema.org", "@graph": graph},
         ensure_ascii=False,
@@ -665,6 +685,210 @@ pages = {
         </div>
     </section>'''),
 }
+
+# ---------------------------------------------------------------------------
+# Blog articles
+# ---------------------------------------------------------------------------
+# NOTE: these are first drafts written to give the blog real, linkable pages.
+# Review the copy before treating it as final marketing material.
+
+ARTICLES = [
+    {
+        "file": "blog-industry-4-0-egypt.html",
+        "category": "AUTOMATION",
+        "title": "Industry 4.0: What It Means for Egyptian Manufacturers",
+        "excerpt": "Exploring how smart factory technologies are transforming local production floors.",
+        "image": "../assets/images/industrial-process-1.jpeg",
+        "date": "2026-07-14",
+        "date_label": "14 July 2026",
+        "read": "6 min read",
+        "body": '''
+            <p>&ldquo;Industry 4.0&rdquo; gets used loosely enough that it has started to sound like a slogan. Stripped of the marketing, it describes something concrete: machines on the factory floor that report what they are doing, and software that turns those reports into decisions. Nothing more mystical than that.</p>
+            <p>For manufacturers in Egypt, the practical question is not whether the concept is valid. It is where to start, and what actually pays for itself on a local production floor.</p>
+
+            <h2>Start with visibility, not robots</h2>
+            <p>The most common mistake we see is treating Industry 4.0 as a hardware purchase. A plant invests in an expensive automated cell, installs it beside lines that are still managed on paper, and the bottleneck simply moves somewhere else.</p>
+            <p>The cheaper and far more useful first step is instrumentation. Before you automate a process, you need to know how that process currently behaves:</p>
+            <ul>
+                <li>How many units per hour does each station really produce, on an average shift rather than a good one?</li>
+                <li>Where does the line stop, how often, and for how long each time?</li>
+                <li>Which stoppages are mechanical, which are material starvation, and which are operator-dependent?</li>
+            </ul>
+            <p>Sensors and a PLC that logs downtime by reason code will answer these questions within a few weeks of running. That data almost always redirects the investment plan — the constraint is rarely where management assumed it was.</p>
+
+            <h2>OEE is the number that matters</h2>
+            <p>Overall Equipment Effectiveness combines three things into one figure: how much of the planned time the line was available, how close it ran to its rated speed, and how much of its output was good on the first pass.</p>
+            <p>It is useful precisely because it refuses to let any one of the three hide behind the others. A line running at full rated speed for four hours a day is not a fast line. A line running continuously while producing rework is not a productive line. Tracking OEE per shift, and reviewing it with the people who run the shift, tends to surface problems that never make it into a management report.</p>
+
+            <h2>What the Egyptian context changes</h2>
+            <p>Some of the standard advice needs adjusting for local conditions.</p>
+            <ul>
+                <li><strong>Power stability.</strong> Control systems and drives should be specified with the assumption that supply will not always be clean. Protection and a graceful, controlled restart matter more than an extra feature on the HMI.</li>
+                <li><strong>Spare parts lead time.</strong> An imported component with a long lead time is a production risk, not just a purchasing line item. Where the engineering allows it, choosing parts that are locally serviceable is worth a small compromise on specification.</li>
+                <li><strong>Operator familiarity.</strong> An interface in Arabic, with the alarm text written in the language the maintenance team actually uses, is not a nicety. It is the difference between a fault that is diagnosed in minutes and one that waits for a call-out.</li>
+                <li><strong>Retrofit over replacement.</strong> Much of the installed base in Egypt is mechanically sound but electrically dated. Modern PLCs, sensors and drives can frequently be fitted to existing frames, which changes the economics considerably.</li>
+            </ul>
+
+            <h2>A sensible sequence</h2>
+            <p>For most plants, the order that works looks like this:</p>
+            <ol>
+                <li>Instrument the existing line and collect downtime data for a full production cycle.</li>
+                <li>Fix what the data exposes — usually changeover time, material handling, or a single recurring mechanical fault.</li>
+                <li>Automate the step that remains the constraint once the easy problems are gone.</li>
+                <li>Connect the line to a central dashboard so the improvement is visible and does not quietly decay.</li>
+            </ol>
+            <p>Each stage funds the next. That matters more than technological ambition, because it means the programme survives a change in budget or priorities.</p>
+
+            <h2>The honest summary</h2>
+            <p>Industry 4.0 is not a threshold you cross. It is a habit of measuring what your equipment does and acting on the measurement. Plants that build that habit get value from modest, incremental investment. Plants that buy the technology without the habit generally end up with expensive equipment and the same output.</p>
+        ''',
+    },
+    {
+        "file": "blog-conveyor-upgrade-signs.html",
+        "category": "MAINTENANCE",
+        "title": "5 Signs Your Conveyor System Needs an Upgrade",
+        "excerpt": "Recognising early warning signs before they turn into costly breakdowns.",
+        "image": "../assets/images/industrial-process-7.jpeg",
+        "date": "2026-06-23",
+        "date_label": "23 June 2026",
+        "read": "5 min read",
+        "body": '''
+            <p>Conveyor systems rarely fail without warning. They degrade — slowly enough that the people working beside them every day stop noticing, until an unplanned stoppage makes the problem impossible to ignore.</p>
+            <p>These are the five signals that most reliably indicate a system has moved past routine maintenance and into upgrade territory.</p>
+
+            <h2>1. Belt tracking needs constant correction</h2>
+            <p>A belt that drifts off centre and has to be adjusted every few days is telling you something structural. Persistent mistracking usually points to a frame that is out of square, worn or misaligned idlers, or a pulley that is no longer true.</p>
+            <p>Repeated adjustment treats the symptom. Meanwhile the belt edge wears against the frame, and material spills at the point of drift. When tracking correction has become part of the weekly routine rather than an occasional task, the frame and roller set are due for assessment.</p>
+
+            <h2>2. Motor current is climbing for the same load</h2>
+            <p>If your drive is drawing measurably more current than it did for an identical duty, something is resisting the motion — seized rollers, bearing wear, contaminated take-up, or a belt that has stiffened with age.</p>
+            <p>This one is worth watching because it is quantifiable and it precedes failure by a comfortable margin. A drive that is working harder is also running hotter, and heat shortens the life of every component around it. A simple trend log on motor current is one of the cheapest early-warning systems available.</p>
+
+            <h2>3. Changeover takes longer than the run</h2>
+            <p>Many older conveyor installations were designed around a single product at a stable volume. If your product mix has broadened since then, you may be spending a disproportionate share of the shift reconfiguring guides, adjusting heights and re-timing transfers.</p>
+            <p>This is a design constraint, not a maintenance problem, and no amount of servicing will resolve it. Adjustable guide rails, quick-release fittings and recipe-driven positioning are the kind of change that pays back in recovered production hours rather than reduced repair cost.</p>
+
+            <h2>4. Spare parts are getting hard to source</h2>
+            <p>When a control component is discontinued and the only supply is the second-hand market, your production continuity now depends on a scarce part. The risk is not gradual — it is a single failure away from an extended stoppage.</p>
+            <p>The same applies to a PLC that no longer has vendor support, or a drive whose programming software will not run on any computer you currently own. If restoring the system after a failure depends on knowledge held by one person, the exposure is real, and an upgrade to a supported platform is cheaper than the outage it prevents.</p>
+
+            <h2>5. Product damage or spillage has crept upward</h2>
+            <p>Rising reject rates at the end of a line are often attributed to upstream process variation when the actual cause is transport. Worn transfer plates, gaps at junctions, misaligned side guides and inconsistent speed matching between sections all cause product to tip, jam or abrade.</p>
+            <p>Because the damage is distributed across the line rather than caused by a single obvious fault, it tends to be absorbed into the accepted scrap figure. It is worth checking directly: inspect the product immediately before and immediately after each transfer point and see where the condition changes.</p>
+
+            <h2>How to decide</h2>
+            <p>One of these signs on its own is usually a maintenance item. Three or more together generally means the system has drifted far enough from its original condition that continued repair is the more expensive path.</p>
+            <p>The useful comparison is not upgrade cost against repair cost. It is upgrade cost against the annual value of the downtime, scrap and labour the current system consumes. Once that figure is written down, the decision is normally straightforward.</p>
+        ''',
+    },
+    {
+        "file": "blog-lean-production-line-waste.html",
+        "category": "LEAN MANUFACTURING",
+        "title": "Reducing Waste with Lean Production Line Design",
+        "excerpt": "How strategic layout changes can dramatically boost overall equipment effectiveness.",
+        "image": "../assets/images/industrial-process-8.jpeg",
+        "date": "2026-05-30",
+        "date_label": "30 May 2026",
+        "read": "6 min read",
+        "body": '''
+            <p>Lean is usually introduced as a set of practices applied to an existing line — reduce inventory, shorten changeovers, standardise work. All of that is sound. But a significant share of the waste in a typical plant was designed in before the first unit was ever produced, and no amount of operational discipline fully removes it.</p>
+            <p>Layout decisions are the ones that keep costing money quietly, every shift, for the working life of the line.</p>
+
+            <h2>Waste that layout creates</h2>
+            <p>Of the classic categories of waste, three are largely determined by physical arrangement:</p>
+            <ul>
+                <li><strong>Transport.</strong> Every metre a part travels between operations is handling that adds cost and no value. Long runs also introduce more transfer points, and every transfer point is a potential jam.</li>
+                <li><strong>Motion.</strong> If an operator turns, stretches or walks to complete a cycle, that movement repeats thousands of times a week. It is both a productivity cost and an ergonomic one.</li>
+                <li><strong>Inventory.</strong> Work in progress accumulates wherever the line's flow rate changes. Buffers between mismatched stations are a symptom of an unbalanced layout, not a solution to it.</li>
+            </ul>
+
+            <h2>Balance the line to the constraint</h2>
+            <p>A production line runs at the speed of its slowest station, and every station faster than that is producing inventory rather than output.</p>
+            <p>The practical exercise is to measure the real cycle time of each station — including the variation, not just the average — and plot them side by side. Two patterns usually appear: one station is clearly the constraint, and several others have far more capacity than they will ever be allowed to use.</p>
+            <p>That chart directs the investment. Adding capacity anywhere except the constraint changes nothing. Splitting the constraint's work across two stations, or reducing its cycle time directly, raises the output of the whole line.</p>
+
+            <h2>Design for changeover from the start</h2>
+            <p>Where product mix is broad, changeover time is often the single largest recoverable loss, and it is far cheaper to design out than to retrofit.</p>
+            <p>The principle is to convert work that currently stops the line into work that can happen while it runs — staging tooling in advance, using positive stops instead of measured adjustment, keeping fasteners uniform so one tool serves the whole line, and holding format settings in the control system rather than in an operator's notebook.</p>
+            <p>None of this is exotic. It simply has to be decided at design stage, because adding it later usually means dismantling what is already installed.</p>
+
+            <h2>Let the layout show its own state</h2>
+            <p>A well-designed line makes its condition visible without anyone having to ask. Clear sightlines down its length, defined floor space for work in progress so that accumulation is immediately obvious, and status indication that can be read from a distance all mean problems are noticed while they are still small.</p>
+            <p>This is the least technical item on the list and frequently the most effective. Waste that is visible tends to get addressed. Waste hidden behind a machine or absorbed into a buffer does not.</p>
+
+            <h2>Leave room to change</h2>
+            <p>A line optimised precisely for today's product and volume is fragile. Product ranges widen, volumes shift, and a layout with no slack has to be rebuilt rather than adapted.</p>
+            <p>Modular frames, service connections with spare capacity, and physical space reserved for an additional station are all modest costs at build time and expensive omissions later. The most efficient line is not the one that squeezes the most into the smallest footprint — it is the one still running efficiently after the third product change.</p>
+
+            <h2>Where to begin</h2>
+            <p>Walk your line and follow a single unit from raw material to finished pack, timing each step and recording every metre it travels and every point at which it waits. Most teams are surprised by the ratio of waiting to working.</p>
+            <p>That one measurement, done honestly, will identify more opportunity than a general commitment to lean principles ever does.</p>
+        ''',
+    },
+]
+
+
+def article_page(a):
+    """Full page content for one blog article."""
+    return '''
+    <section id="main-content" class="section">
+        <div class="container" style="max-width:760px;">
+            <p style="margin-bottom:28px;"><a href="blog.html" style="color:var(--primary-blue); text-decoration:none; font-size:0.9rem; font-weight:600;">&larr; Back to all articles</a></p>
+            <p style="display:flex; gap:14px; flex-wrap:wrap; align-items:center; font-size:0.82rem; color:var(--text-muted); margin-bottom:28px;">
+                <span style="color:var(--primary-blue); font-weight:700; letter-spacing:0.5px;">{category}</span>
+                <span>&middot;</span><time datetime="{date}">{date_label}</time>
+                <span>&middot;</span><span>{read}</span>
+            </p>
+            <article class="article-body" style="line-height:1.85; font-size:1.02rem;">
+                {body}
+            </article>
+            <div class="card bg-alt" style="margin-top:56px; padding:36px; text-align:center; box-shadow:var(--shadow-sm);">
+                <h3 style="margin-bottom:12px; font-size:1.2rem;">Planning a project like this?</h3>
+                <p style="color:var(--text-muted); line-height:1.8; margin-bottom:24px;">Our engineers can review your current line and advise on the most cost-effective route forward &mdash; no obligation.</p>
+                <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+                    <a href="request-quotation.html" class="btn btn-primary" style="padding:13px 28px; text-decoration:none;">Request a Quotation</a>
+                    <a href="https://wa.me/20108472717" target="_blank" rel="noopener" style="padding:13px 28px; border:1px solid var(--border-color); border-radius:var(--radius-sm); text-decoration:none; color:inherit;">Ask on WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>'''.format(**a)
+
+
+def blog_index():
+    """Blog listing built from ARTICLES so cards and pages can't drift apart."""
+    cards = []
+    for a in ARTICLES:
+        cards.append('''
+                <a href="{file}" class="card bg-main" style="padding:0; overflow:hidden; box-shadow:var(--shadow-sm); text-decoration:none; color:inherit; display:block;">
+                    <img src="{image}" alt="" style="width:100%;height:180px;object-fit:cover;">
+                    <div style="padding:24px;">
+                        <span style="font-size:0.8rem;color:var(--primary-blue);font-weight:600;">{category}</span>
+                        <h3 style="margin:10px 0 10px;font-size:1.1rem;">{title}</h3>
+                        <p style="font-size:0.9rem;line-height:1.7;color:var(--text-muted);">{excerpt}</p>
+                        <p style="margin-top:16px;font-size:0.85rem;color:var(--text-muted);"><time datetime="{date}">{date_label}</time> &middot; {read}</p>
+                        <span style="display:inline-block;margin-top:14px;color:var(--primary-blue);font-weight:600;font-size:0.9rem;">Read article &rarr;</span>
+                    </div>
+                </a>'''.format(**a))
+    return '''
+    <section id="main-content" class="section">
+        <div class="container">
+            <div class="grid grid-3">{}
+            </div>
+        </div>
+    </section>'''.format("".join(cards))
+
+
+pages['blog.html'] = (
+    'Blog',
+    'Latest articles, insights and news from Iconic Mach Engineering.',
+    blog_index(),
+)
+
+for _a in ARTICLES:
+    page_heroes[_a['file']] = ('image', _a['image'], _a['title'], _a['excerpt'])
+    pages[_a['file']] = (_a['title'], _a['excerpt'], article_page(_a))
+
+ARTICLES_BY_FILE = {a['file']: a for a in ARTICLES}
 
 template = """<!DOCTYPE html>
 <html lang="en" dir="ltr">

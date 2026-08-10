@@ -1,9 +1,22 @@
 // Cloudflare Pages Function — POST /api/submit-inquiry
 //
-// Required environment variables (Cloudflare dashboard → Settings → Environment variables):
-//   RESEND_API_KEY  — API key from https://resend.com  (free tier: 100 emails/day)
-//   INQUIRY_TO      — optional, defaults to sales@iconicmach.com
-//   INQUIRY_FROM    — optional, defaults to website@iconicmach.com (domain must be verified in Resend)
+// Delivers website inquiries to sales@iconicmach.com via Web3Forms.
+// Chosen over SMTP/Resend because it needs no verified sending domain and no
+// SMTP credentials — Web3Forms sends from its own infrastructure and delivers
+// to the inbox that owns the access key.
+//
+// Environment variable (Cloudflare dashboard → Pages project → Settings →
+// Environment variables), required in both Production and Preview:
+//
+//   WEB3FORMS_ACCESS_KEY — access key issued to sales@iconicmach.com
+//                          (get one at https://web3forms.com — the key is
+//                          public by design, but we keep it server-side so
+//                          bots can't scrape it out of the page HTML)
+//
+// This runs as a proxy rather than posting to Web3Forms from the browser so
+// that validation, length caps and the honeypot are enforced server-side.
+
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
 const MAX_LEN = {
   name: 120,
@@ -24,6 +37,7 @@ export async function onRequestPost(context) {
     const body = await request.json();
 
     // Honeypot — bots fill hidden fields, humans never see them.
+    // Return 200 so the bot believes it succeeded and does not retry.
     if (body.company_website) {
       return json({ success: true, message: 'Inquiry received' }, 200);
     }
@@ -54,16 +68,19 @@ export async function onRequestPost(context) {
       receivedAt: new Date().toISOString()
     };
 
-    if (!env.RESEND_API_KEY) {
-      // Not configured yet — log so the submission is at least visible in Worker logs
-      // instead of being silently dropped, and surface the failure to the visitor.
-      console.error('RESEND_API_KEY is not set; inquiry not delivered:', JSON.stringify(inquiry));
+    if (!env.WEB3FORMS_ACCESS_KEY) {
+      // Not configured yet — log the submission so it is at least recoverable
+      // from Worker logs instead of silently vanishing, and tell the visitor.
+      console.error(
+        'WEB3FORMS_ACCESS_KEY is not set; inquiry not delivered:',
+        JSON.stringify(inquiry)
+      );
       return json({ error: 'Email delivery is not configured' }, 500);
     }
 
-    const sent = await sendEmail(env, inquiry);
+    const sent = await deliver(env, inquiry);
     if (!sent.ok) {
-      console.error('Resend API error:', sent.status, sent.detail);
+      console.error('Web3Forms delivery failed:', sent.status, sent.detail);
       return json({ error: 'Failed to deliver inquiry' }, 502);
     }
 
@@ -74,62 +91,69 @@ export async function onRequestPost(context) {
   }
 }
 
-async function sendEmail(env, i) {
-  const to = env.INQUIRY_TO || 'sales@iconicmach.com';
-  const from = env.INQUIRY_FROM || 'website@iconicmach.com';
+async function deliver(env, i) {
   const label = i.formType === 'quotation' ? 'Quotation Request' : 'Contact Inquiry';
 
-  const rows = [
-    ['Name', i.name],
-    ['Email', i.email],
-    ['Phone', i.phone],
-    ['Company', i.company],
-    ['Subject', i.subject],
-    ['Product / Service', i.product],
-    ['Language', i.language.toUpperCase()],
-    ['Page', i.page],
-    ['Country', i.country],
-    ['Received', i.receivedAt]
-  ].filter(([, v]) => v);
+  // Web3Forms emails every key it receives, so send readable labels rather
+  // than raw field names, and omit anything the visitor left blank.
+  const payload = {
+    access_key: env.WEB3FORMS_ACCESS_KEY,
+    from_name: 'Iconic Mach Website',
+    subject: `[${label}] ${i.subject || i.name}${i.company ? ' — ' + i.company : ''}`,
+    replyto: i.email,
 
-  const html = `
-    <div style="font-family:Arial,Helvetica,sans-serif;max-width:640px">
-      <h2 style="color:#0a3150;margin:0 0 16px">New ${label} — iconicmach.com</h2>
-      <table cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:14px">
-        ${rows.map(([k, v]) => `<tr><td style="background:#f4f7fb;font-weight:600;width:170px">${esc(k)}</td><td>${esc(v)}</td></tr>`).join('')}
-      </table>
-      <h3 style="color:#0a3150;margin:24px 0 8px">Message</h3>
-      <p style="white-space:pre-wrap;line-height:1.7;font-size:14px">${esc(i.message)}</p>
-    </div>`;
+    name: i.name,
+    email: i.email,
+    message: i.message
+  };
 
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${env.RESEND_API_KEY}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      from: `Iconic Mach Website <${from}>`,
-      to: [to],
-      reply_to: i.email,
-      subject: `[${label}] ${i.subject || i.name}${i.company ? ' — ' + i.company : ''}`,
-      html
-    })
-  });
+  const optional = {
+    Phone: i.phone,
+    Company: i.company,
+    'Product / Service': i.product,
+    'Form': label,
+    'Language': i.language.toUpperCase(),
+    'Submitted from': i.page,
+    'Visitor country': i.country,
+    'Received (UTC)': i.receivedAt
+  };
+  for (const [key, value] of Object.entries(optional)) {
+    if (value) payload[key] = value;
+  }
 
-  if (res.ok) return { ok: true };
-  return { ok: false, status: res.status, detail: await res.text() };
+  let res;
+  try {
+    res = await fetch(WEB3FORMS_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+  } catch (err) {
+    return { ok: false, status: 0, detail: err && err.message };
+  }
+
+  const detail = await res.text();
+  if (!res.ok) return { ok: false, status: res.status, detail };
+
+  // Web3Forms can answer 200 with {"success": false} on a rejected key.
+  try {
+    const parsed = JSON.parse(detail);
+    if (parsed.success === false) {
+      return { ok: false, status: res.status, detail };
+    }
+  } catch {
+    // Non-JSON 200 — treat as delivered rather than failing a real send.
+  }
+
+  return { ok: true };
 }
 
 function clean(value, max) {
   if (typeof value !== 'string') return '';
   return value.trim().slice(0, max);
-}
-
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, (c) => (
-    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
-  ));
 }
 
 function json(payload, status) {
