@@ -92,6 +92,44 @@ def prettify_links(html):
     return html
 
 
+def lazy_load_images(html):
+    """Defer off-screen images.
+
+    The header logo is skipped: it is above the fold on every page, and lazy
+    loading it would delay the most visible element. Images that already
+    declare `loading` are left alone.
+    """
+    def add(match):
+        tag = match.group(0)
+        if 'loading=' in tag or 'images/iconicmach.png' in tag:
+            return tag
+        return tag[:-1].rstrip() + ' loading="lazy" decoding="async">'
+
+    return re.sub(r'<img\b[^>]*>', add, html)
+
+
+def defer_videos(html, poster):
+    """Stop every remaining <video> from downloading on load.
+
+    make_hero() already defers the hero. This catches the videos embedded in
+    page content, which autoplayed too — 45 MB of them on the English pages
+    alone. They get the page's hero poster so a phone sees a still image
+    rather than a black rectangle.
+    """
+    def fix(match):
+        tag = match.group(0)
+        if 'data-src=' in tag:
+            return tag
+        tag = tag.replace(' src="', ' data-src="')
+        if 'poster=' not in tag:
+            tag = tag.replace('<video', '<video poster="%s"' % poster, 1)
+        if 'preload=' not in tag:
+            tag = tag.replace('<video', '<video preload="none"', 1)
+        return tag
+
+    return re.sub(r'<video\b[^>]*>', fix, html)
+
+
 def build_schema(filename, title, description):
     """JSON-LD graph: the Organization plus a WebPage node for this page."""
     url = "{}/ar/{}".format(domain, slug_for(filename))
@@ -143,6 +181,57 @@ def build_schema(filename, title, description):
     )
 
 
+# Still image shown in place of each hero video. It renders instantly, and on
+# mobile or a metered/slow connection it is ALL that loads — the video file is
+# only attached when the connection can afford it (see VIDEO_LOADER below).
+VIDEO_POSTERS = {
+    'index.html':            '../assets/images/industrial-process-8.jpeg',
+    'production-lines.html': '../assets/images/industrial-process-1.jpeg',
+    'conveyor-systems.html': '../assets/images/industrial-process-3.jpeg',
+    'services.html':         '../assets/images/industrial-process-5.jpeg',
+    'industries.html':       '../assets/images/industrial-process-7.jpeg',
+    'projects.html':         '../assets/images/industrial-process-10.jpeg',
+}
+
+DEFAULT_POSTER = '../assets/images/industrial-process-1.jpeg'
+
+# The hero videos are 8-21 MB each and autoplay. Downloading one over Egyptian
+# mobile data to decorate a page is not a reasonable trade, so the <video> ships
+# with no src at all: the poster carries the page, and the file is attached only
+# on a wide viewport with a connection that is not save-data or 2g/3g.
+VIDEO_LOADER = """
+    <script>
+        (function () {
+            var vids = [].slice.call(document.querySelectorAll('video[data-src]'));
+            if (!vids.length) return;
+            var c = navigator.connection || {};
+            var stingy = c.saveData === true || /(^|-)(2g|slow-2g)$/.test(c.effectiveType || '');
+            // Narrow screen, save-data, or 2g: posters only, no video bytes.
+            if (window.innerWidth < 768 || stingy) return;
+            var load = function (v) {
+                if (v.getAttribute('data-loaded')) return;
+                v.setAttribute('data-loaded', '1');
+                v.src = v.getAttribute('data-src');
+                v.load();
+            };
+            // The hero is always above the fold, so load it directly rather
+            // than relying on IntersectionObserver, which never fires in a
+            // tab that is not compositing.
+            load(vids.shift());
+            if (!vids.length) return;
+            if (!('IntersectionObserver' in window)) { vids.forEach(load); return; }
+            // The rest wait until they are near the viewport, so a page with
+            // several videos does not pull them all at once.
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) { load(e.target); io.unobserve(e.target); }
+                });
+            }, { rootMargin: '200px' });
+            vids.forEach(function (v) { io.observe(v); });
+        })();
+    </script>"""
+
+
 page_heroes = {
     'index.html':              ('video', '../assets/videos/full line.mp4', 'رواد الهندسة الصناعية', 'نصمم وننتج ونركب خطوط إنتاج عالمية المستوى في مصر ودول الخليج.'),
     'production-lines.html':   ('video', '../assets/videos/production-line-video-12.mp4', 'خطوط الإنتاج', 'حلول متكاملة للأغذية والمشروبات والتغليف والتجميع الصناعي.'),
@@ -162,11 +251,12 @@ page_heroes = {
 }
 
 def make_hero(filename):
+    poster = VIDEO_POSTERS.get(filename, DEFAULT_POSTER)
     media_type, src, title, subtitle = page_heroes.get(filename, ('image', '../assets/images/industrial-process-1.jpeg', 'آيكونيك ماشين الهندسية', ''))
     if filename == 'index.html':
         return f'''
     <section class="page-hero" style="position:relative; height:100vh; min-height:600px; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden;">
-        <video autoplay loop muted playsinline src="{src}"
+        <video autoplay loop muted playsinline preload="none" poster="{poster}" data-src="{src}"
             style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:scale(1.15) translate(-2%, -2%);"></video>
         <div style="position:absolute; inset:0; background:rgba(6,18,38,0.62); z-index:1;"></div>
         <div class="container reveal fade-in" style="position:relative; z-index:2; color:#fff; padding:0 20px;">
@@ -183,7 +273,7 @@ def make_hero(filename):
     elif media_type == 'video':
         return f'''
     <section class="page-hero" style="position:relative; height:55vh; min-height:380px; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden;">
-        <video autoplay loop muted playsinline src="{src}"
+        <video autoplay loop muted playsinline preload="none" poster="{poster}" data-src="{src}"
             style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:scale(1.15) translate(-2%, -2%);"></video>
         <div style="position:absolute; inset:0; background:rgba(6,18,38,0.58); z-index:1;"></div>
         <div class="container reveal fade-in" style="position:relative; z-index:2; color:#fff; padding:0 20px;">
@@ -354,7 +444,7 @@ pages = {
                     <div style="padding:24px;"><h3 style="margin-bottom:10px;color:var(--primary-blue);">تغليف السلع الاستهلاكية</h3><p style="line-height:1.7;">خطوط تغليف عالية السرعة تُلغي الاختناقات وتُبقي السلع الاستهلاكية سريعة الحركة تتدفق بسلاسة.</p></div>
                 </div>
                 <div class="card bg-main" style="padding:0; overflow:hidden; box-shadow:var(--shadow-sm);">
-                    <video autoplay loop muted playsinline src="../assets/videos/assembly.mp4" style="width:100%;height:220px;object-fit:cover;"></video>
+                    <video autoplay loop muted playsinline src="../assets/videos/production-line-video-14.mp4" style="width:100%;height:220px;object-fit:cover;"></video>
                     <div style="padding:24px;"><h3 style="margin-bottom:10px;color:var(--primary-blue);">التجميع الصناعي</h3><p style="line-height:1.7;">خطوط تجميع شاقة للتشغيل المتواصل في البيئات الصناعية القاسية.</p></div>
                 </div>
             </div>
@@ -498,9 +588,9 @@ pages = {
             </div>
             <p style="max-width:760px;margin:0 auto 48px;text-align:center;line-height:1.8;color:var(--text-muted);">من خطوط التعبئة عالية السرعة إلى أنظمة الفرز المعقدة — استكشف كيف حوّلنا أرضيات التصنيع في مصر ومنطقة الخليج.</p>
             <div class="grid grid-3">
-                <div class="card bg-main" style="padding:0;overflow:hidden;"><video autoplay loop muted playsinline src="../assets/videos/production-line-video-3.mp4" style="width:100%;height:180px;object-fit:cover;"></video><div style="padding:20px;"><h4 style="margin-bottom:6px;">خط تعبئة المشروبات</h4><p style="font-size:0.9rem;color:var(--text-muted);">خط تعبئة وتغطية متكامل — 12,000 زجاجة/ساعة</p></div></div>
+                <div class="card bg-main" style="padding:0;overflow:hidden;"><video autoplay loop muted playsinline src="../assets/videos/beverages.mp4" style="width:100%;height:180px;object-fit:cover;"></video><div style="padding:20px;"><h4 style="margin-bottom:6px;">خط تعبئة المشروبات</h4><p style="font-size:0.9rem;color:var(--text-muted);">خط تعبئة وتغطية متكامل — 12,000 زجاجة/ساعة</p></div></div>
                 <div class="card bg-main" style="padding:0;overflow:hidden;"><video autoplay loop muted playsinline src="../assets/videos/production-line-video-4.mp4" style="width:100%;height:180px;object-fit:cover;"></video><div style="padding:20px;"><h4 style="margin-bottom:6px;">نظام تغليف السلع الاستهلاكية</h4><p style="font-size:0.9rem;color:var(--text-muted);">خط كرتنة ووضع في صناديق متعدد المسارات</p></div></div>
-                <div class="card bg-main" style="padding:0;overflow:hidden;"><video autoplay loop muted playsinline src="../assets/videos/production-line-video-5.mp4" style="width:100%;height:180px;object-fit:cover;"></video><div style="padding:20px;"><h4 style="margin-bottom:6px;">شبكة سيور المستودع</h4><p style="font-size:0.9rem;color:var(--text-muted);">تركيب سيور حزام ودرفيل لمستودع كامل</p></div></div>
+                <div class="card bg-main" style="padding:0;overflow:hidden;"><video autoplay loop muted playsinline src="../assets/videos/conveyor-1.mp4" style="width:100%;height:180px;object-fit:cover;"></video><div style="padding:20px;"><h4 style="margin-bottom:6px;">شبكة سيور المستودع</h4><p style="font-size:0.9rem;color:var(--text-muted);">تركيب سيور حزام ودرفيل لمستودع كامل</p></div></div>
             </div>
             <div style="text-align:center;margin-top:40px;"><a href="contact.html" class="btn btn-primary" style="padding:14px 32px;text-decoration:none;">ابدأ مشروعك</a></div>
         </div>
@@ -853,6 +943,7 @@ template = """<!DOCTYPE html>
     <meta name="theme-color" content="#0a3150">
     <link rel="manifest" href="../site.webmanifest">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/images/iconicmach.png">
     <meta name="web3forms-key" content="{web3forms_key}">
     <script type="application/ld+json">{schema}</script>
     {analytics}
@@ -922,6 +1013,7 @@ template = """<!DOCTYPE html>
     <script src="../assets/js/main.js?v={asset_version}"></script>
     <script src="../assets/js/animations.js?v={asset_version}"></script>
     <script src="../assets/js/forms.js?v={asset_version}"></script>
+{video_loader}
 </body>
 </html>"""
 
@@ -929,19 +1021,25 @@ os.makedirs('ar', exist_ok=True)
 for filename, (title, description, content) in pages.items():
     hero = make_hero(filename)
     filepath = os.path.join('ar', filename)
+    page = template.format(
+        title=title,
+        description=description,
+        domain=domain,
+        filename=filename,
+        content=content,
+        hero=hero,
+        footer=FOOTER,
+        schema=build_schema(filename, title, description),
+        analytics=analytics_snippet(),
+        web3forms_key=WEB3FORMS_ACCESS_KEY,
+        slug=slug_for(filename),
+        video_loader=VIDEO_LOADER,
+        asset_version=ASSET_VERSION,
+    )
+    page = prettify_links(page)
+    page = lazy_load_images(page)
+    page = defer_videos(page, VIDEO_POSTERS.get(filename, DEFAULT_POSTER))
+
     with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(prettify_links(template.format(
-            title=title,
-            description=description,
-            domain=domain,
-            filename=filename,
-            content=content,
-            hero=hero,
-            footer=FOOTER,
-            schema=build_schema(filename, title, description),
-            analytics=analytics_snippet(),
-            web3forms_key=WEB3FORMS_ACCESS_KEY,
-            slug=slug_for(filename),
-            asset_version=ASSET_VERSION
-        )))
+        f.write(page)
 print("Arabic pages generated successfully.")

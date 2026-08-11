@@ -92,6 +92,44 @@ def prettify_links(html):
     return html
 
 
+def lazy_load_images(html):
+    """Defer off-screen images.
+
+    The header logo is skipped: it is above the fold on every page, and lazy
+    loading it would delay the most visible element. Images that already
+    declare `loading` are left alone.
+    """
+    def add(match):
+        tag = match.group(0)
+        if 'loading=' in tag or 'images/iconicmach.png' in tag:
+            return tag
+        return tag[:-1].rstrip() + ' loading="lazy" decoding="async">'
+
+    return re.sub(r'<img\b[^>]*>', add, html)
+
+
+def defer_videos(html, poster):
+    """Stop every remaining <video> from downloading on load.
+
+    make_hero() already defers the hero. This catches the videos embedded in
+    page content, which autoplayed too — 45 MB of them on the English pages
+    alone. They get the page's hero poster so a phone sees a still image
+    rather than a black rectangle.
+    """
+    def fix(match):
+        tag = match.group(0)
+        if 'data-src=' in tag:
+            return tag
+        tag = tag.replace(' src="', ' data-src="')
+        if 'poster=' not in tag:
+            tag = tag.replace('<video', '<video poster="%s"' % poster, 1)
+        if 'preload=' not in tag:
+            tag = tag.replace('<video', '<video preload="none"', 1)
+        return tag
+
+    return re.sub(r'<video\b[^>]*>', fix, html)
+
+
 def build_schema(filename, title, description):
     """JSON-LD graph: the Organization plus a WebPage node for this page."""
     url = "{}/en/{}".format(domain, slug_for(filename))
@@ -142,6 +180,57 @@ def build_schema(filename, title, description):
         separators=(",", ":"),
     )
 
+# Still image shown in place of each hero video. It renders instantly, and on
+# mobile or a metered/slow connection it is ALL that loads — the video file is
+# only attached when the connection can afford it (see VIDEO_LOADER below).
+VIDEO_POSTERS = {
+    'index.html':            '../assets/images/industrial-process-8.jpeg',
+    'production-lines.html': '../assets/images/industrial-process-1.jpeg',
+    'conveyor-systems.html': '../assets/images/industrial-process-3.jpeg',
+    'services.html':         '../assets/images/industrial-process-5.jpeg',
+    'industries.html':       '../assets/images/industrial-process-7.jpeg',
+    'projects.html':         '../assets/images/industrial-process-10.jpeg',
+}
+
+DEFAULT_POSTER = '../assets/images/industrial-process-1.jpeg'
+
+# The hero videos are 8-21 MB each and autoplay. Downloading one over Egyptian
+# mobile data to decorate a page is not a reasonable trade, so the <video> ships
+# with no src at all: the poster carries the page, and the file is attached only
+# on a wide viewport with a connection that is not save-data or 2g/3g.
+VIDEO_LOADER = """
+    <script>
+        (function () {
+            var vids = [].slice.call(document.querySelectorAll('video[data-src]'));
+            if (!vids.length) return;
+            var c = navigator.connection || {};
+            var stingy = c.saveData === true || /(^|-)(2g|slow-2g)$/.test(c.effectiveType || '');
+            // Narrow screen, save-data, or 2g: posters only, no video bytes.
+            if (window.innerWidth < 768 || stingy) return;
+            var load = function (v) {
+                if (v.getAttribute('data-loaded')) return;
+                v.setAttribute('data-loaded', '1');
+                v.src = v.getAttribute('data-src');
+                v.load();
+            };
+            // The hero is always above the fold, so load it directly rather
+            // than relying on IntersectionObserver, which never fires in a
+            // tab that is not compositing.
+            load(vids.shift());
+            if (!vids.length) return;
+            if (!('IntersectionObserver' in window)) { vids.forEach(load); return; }
+            // The rest wait until they are near the viewport, so a page with
+            // several videos does not pull them all at once.
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) { load(e.target); io.unobserve(e.target); }
+                });
+            }, { rootMargin: '200px' });
+            vids.forEach(function (v) { io.observe(v); });
+        })();
+    </script>"""
+
+
 # Hero section per page: (bg_image_or_video, title, subtitle)
 page_heroes = {
     'index.html':              ('video', '../assets/videos/full line.mp4', 'Leading Industrial Engineering', 'We design, manufacture & install world-class production lines across Egypt and the GCC.'),
@@ -162,11 +251,12 @@ page_heroes = {
 }
 
 def make_hero(filename):
+    poster = VIDEO_POSTERS.get(filename, DEFAULT_POSTER)
     media_type, src, title, subtitle = page_heroes.get(filename, ('image', '../assets/images/industrial-process-1.jpeg', 'Iconic Mach Engineering', ''))
     if filename == 'index.html':
         return f'''
     <section class="page-hero" style="position:relative; height:100vh; min-height:600px; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden;">
-        <video autoplay loop muted playsinline src="{src}"
+        <video autoplay loop muted playsinline preload="none" poster="{poster}" data-src="{src}"
             style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:scale(1.15) translate(-2%, -2%);"></video>
         <div style="position:absolute; inset:0; background:rgba(6,18,38,0.62); z-index:1;"></div>
         <div class="container reveal fade-in" style="position:relative; z-index:2; color:#fff; padding: 0 20px;">
@@ -183,7 +273,7 @@ def make_hero(filename):
     elif media_type == 'video':
         return f'''
     <section class="page-hero" style="position:relative; height:55vh; min-height:380px; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden;">
-        <video autoplay loop muted playsinline src="{src}"
+        <video autoplay loop muted playsinline preload="none" poster="{poster}" data-src="{src}"
             style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:scale(1.15) translate(-2%, -2%);"></video>
         <div style="position:absolute; inset:0; background:rgba(6,18,38,0.58); z-index:1;"></div>
         <div class="container reveal fade-in" style="position:relative; z-index:2; color:#fff; padding:0 20px;">
@@ -963,6 +1053,7 @@ template = """<!DOCTYPE html>
     <meta name="theme-color" content="#0a3150">
     <link rel="manifest" href="../site.webmanifest">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/images/iconicmach.png">
     <meta name="web3forms-key" content="{web3forms_key}">
     <script type="application/ld+json">{schema}</script>
     {analytics}
@@ -1033,6 +1124,7 @@ template = """<!DOCTYPE html>
     <script src="../assets/js/main.js?v={asset_version}"></script>
     <script src="../assets/js/animations.js?v={asset_version}"></script>
     <script src="../assets/js/forms.js?v={asset_version}"></script>
+{video_loader}
 </body>
 </html>"""
 
@@ -1040,19 +1132,25 @@ os.makedirs('en', exist_ok=True)
 for filename, (title, description, content) in pages.items():
     hero = make_hero(filename)
     filepath = os.path.join('en', filename)
+    page = template.format(
+        title=title,
+        description=description,
+        domain=domain,
+        filename=filename,
+        content=content,
+        hero=hero,
+        footer=FOOTER,
+        schema=build_schema(filename, title, description),
+        analytics=analytics_snippet(),
+        web3forms_key=WEB3FORMS_ACCESS_KEY,
+        slug=slug_for(filename),
+        video_loader=VIDEO_LOADER,
+        asset_version=ASSET_VERSION,
+    )
+    page = prettify_links(page)
+    page = lazy_load_images(page)
+    page = defer_videos(page, VIDEO_POSTERS.get(filename, DEFAULT_POSTER))
+
     with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(prettify_links(template.format(
-            title=title,
-            description=description,
-            domain=domain,
-            filename=filename,
-            content=content,
-            hero=hero,
-            footer=FOOTER,
-            schema=build_schema(filename, title, description),
-            analytics=analytics_snippet(),
-            web3forms_key=WEB3FORMS_ACCESS_KEY,
-            slug=slug_for(filename),
-            asset_version=ASSET_VERSION
-        )))
+        f.write(page)
 print("English pages generated successfully.")

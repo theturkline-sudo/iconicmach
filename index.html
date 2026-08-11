@@ -1,23 +1,52 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iconic Mach Engineering | آيكونيك ماشين الهندسية</title>
-    <!-- Redirect to Arabic as default -->
-    <meta http-equiv="refresh" content="0; url=/ar/">
-    
+    <meta name="description" content="Iconic Mach Engineering — production lines, conveyor systems and industrial automation across Egypt and the GCC.">
+
+    <!-- Language selector root. No meta-refresh: Google treats it as a soft
+         redirect and it strands users who land here with JS disabled. The
+         canonical points at /en/ and both languages are declared, so search
+         engines index the real pages rather than this shim. -->
+    <link rel="canonical" href="https://iconicmach.com/en/">
+    <link rel="alternate" hreflang="en" href="https://iconicmach.com/en/">
+    <link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/">
+    <link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/">
+
+    <meta name="theme-color" content="#0a3150">
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/images/iconicmach.png">
+    <link rel="manifest" href="/site.webmanifest">
+
     <script>
-        // Check for preferred language
-        var userLang = navigator.language || navigator.userLanguage;
-        if (userLang.startsWith('en')) {
-            window.location.replace('/en/');
-        } else {
-            window.location.replace('/ar/');
-        }
+        // Send visitors to their language; anything non-Arabic gets English.
+        (function () {
+            var lang = navigator.language || navigator.userLanguage || '';
+            window.location.replace(lang.toLowerCase().indexOf('ar') === 0 ? '/ar/' : '/en/');
+        })();
     </script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; margin: 0; text-align: center;
+            background: #061226; color: #c9d8ec;
+        }
+        a { color: #4adeae; text-decoration: none; font-weight: 600; }
+        .links { margin-top: 20px; display: flex; gap: 24px; justify-content: center; }
+    </style>
 </head>
 <body>
-    <p>Redirecting to Iconic Mach Engineering... <a href="/ar/">Click here</a></p>
+    <!-- Shown only if the redirect above did not run. -->
+    <div>
+        <img src="/assets/images/footer_logo.png" alt="Iconic Mach Engineering" style="height:64px;">
+        <p>Choose your language &middot; اختر لغتك</p>
+        <div class="links">
+            <a href="/en/">English</a>
+            <a href="/ar/">العربية</a>
+        </div>
+    </div>
 </body>
 </html>

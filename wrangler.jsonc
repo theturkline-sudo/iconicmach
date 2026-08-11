@@ -6,7 +6,9 @@
     "enabled": true
   },
   "assets": {
-    "directory": "."
+    "directory": ".",
+    // Serve /404.html instead of an empty body on unknown URLs.
+    "not_found_handling": "404-page"
   },
   "compatibility_flags": [
     "nodejs_compat"

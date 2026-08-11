@@ -109,6 +109,26 @@ or JS you may keep running the old file — bump `ASSET_VERSION` in both
 generators (it appends `?v=N` to every local CSS/JS URL) and regenerate. That
 same mechanism stops returning visitors running stale assets after a deploy.
 
+## Media loading
+
+Hero and content videos are 8-21 MB each and used to autoplay on load: 29 MB to
+open the English homepage. They now ship as `poster` + `data-src` with no
+`src`, and an inline loader attaches the file only when it is affordable:
+
+- viewport under 768 px, save-data, or a 2g connection -> posters only, no video
+- otherwise the hero loads immediately, and the rest load as they near the
+  viewport (IntersectionObserver)
+
+The hero deliberately does not wait on IntersectionObserver: it never fires in a
+tab that is not compositing, which would leave the hero as a still forever.
+
+Posters are set per page in `VIDEO_POSTERS`; content videos reuse their page hero
+poster. Images outside the header logo carry `loading="lazy"`.
+
+**The real fix is still to compress the videos** — 121 MB of MP4 for a brochure
+site is far too much, and `ffmpeg` was not available here. Re-encoding to ~2-3 MB
+each would let the videos load everywhere instead of being withheld on mobile.
+
 ## URLs
 
 The site is served **extensionless**: Cloudflare 307-redirects `/en/contact.html`
