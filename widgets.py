@@ -354,3 +354,44 @@ def faq_schema_nodes(lang, page_url):
             for q, a in HOME_FAQ[lang]["items"]
         ],
     }
+
+
+# --- Google Tag Manager -----------------------------------------------------
+#
+# GA4 stays hardcoded in the generators and is deliberately NOT added as a tag
+# inside GTM: having both would double-count every pageview. GTM is here for
+# future marketing tags (Ads conversions, Meta Pixel, LinkedIn Insight).
+#
+# The strict CSP in /_headers already allows googletagmanager.com, so the
+# container loads. Any THIRD-PARTY tag added in GTM will be blocked until its
+# host is added to script-src / connect-src there.
+
+GTM_CONTAINER_ID = "GTM-KL9S52KM"
+
+
+def gtm_head():
+    """Container loader, placed as high in <head> as practical."""
+    if not GTM_CONTAINER_ID:
+        return ""
+    return (
+        "<!-- Google Tag Manager -->\n"
+        "    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n"
+        "    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\n"
+        "    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\n"
+        "    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\n"
+        "    })(window,document,'script','dataLayer','" + GTM_CONTAINER_ID + "');</script>\n"
+        "    <!-- End Google Tag Manager -->"
+    )
+
+
+def gtm_body():
+    """noscript fallback, immediately after <body>."""
+    if not GTM_CONTAINER_ID:
+        return ""
+    return (
+        "<!-- Google Tag Manager (noscript) -->\n"
+        '    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id='
+        + GTM_CONTAINER_ID + '"\n'
+        '    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>\n'
+        "    <!-- End Google Tag Manager (noscript) -->"
+    )

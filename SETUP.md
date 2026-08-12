@@ -85,7 +85,42 @@ was accepted by Google with HTTP 204.
 Business size was set to "Medium (11-100 employees)" as a guess — correct it in
 Admin → Property details if wrong. It only affects Google's benchmarking.
 
-### 3. Blog articles are drafts
+### 3. Google Search Console — done
+
+Property `https://iconicmach.com/` (URL-prefix), owned by `theturkline@gmail.com`,
+verified by meta tag. `sitemap.xml` submitted: **Success, 36 pages discovered**.
+
+Verification uses the HTML-tag method, not the file Google recommends:
+`html_handling` 307-redirects `/google….html` to the extensionless URL, and a
+verification file behind a redirect is not reliably accepted. GA-based
+verification was also out, since it checks the homepage and root `index.html`
+is the language selector, which carries no gtag.
+
+**Do not remove** the `google-site-verification` meta from `index.html` or the
+generators — Google rechecks it periodically, not just once.
+
+### 4. Google Tag Manager — installed, empty on purpose
+
+| | |
+|---|---|
+| Account | Iconic Mach Engineering (Egypt) |
+| Container | `iconicmach.com`, Web |
+| Container ID | `GTM-KL9S52KM` |
+
+Snippet in `<head>` and the `noscript` iframe after `<body>` on all 36 pages,
+via `widgets.gtm_head()` / `widgets.gtm_body()`.
+
+**GA4 is deliberately NOT inside GTM.** It stays hardcoded as `gtag`. Adding a
+GA4 tag in GTM as well would double-count every pageview.
+
+**CSP and GTM interact.** `/_headers` allows `googletagmanager.com` for scripts,
+connections and frames, so the container itself loads. Any *third-party* tag you
+add in GTM (Meta Pixel, Google Ads, LinkedIn) will be **silently blocked** until
+its host is added to `script-src` / `connect-src` in `_headers`. That was a
+deliberate choice: keep the strict policy, and widen it per tag. Tell me which
+tag you added and I will open exactly that host.
+
+### 5. Blog articles are drafts
 
 The three articles in each language were drafted to give the blog real,
 linkable pages. Review the copy before treating it as final marketing material.

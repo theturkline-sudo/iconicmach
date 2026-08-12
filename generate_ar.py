@@ -957,6 +957,7 @@ template = """<!DOCTYPE html>
     <meta name="web3forms-key" content="{web3forms_key}">
     <script type="application/ld+json">{schema}</script>
     {analytics}
+    {gtm_head}
     <link rel="stylesheet" href="../assets/css/variables.css?v={asset_version}">
     <link rel="stylesheet" href="../assets/css/reset.css?v={asset_version}">
     <link rel="stylesheet" href="../assets/css/layout.css?v={asset_version}">
@@ -972,6 +973,7 @@ template = """<!DOCTYPE html>
     </style>
 </head>
 <body>
+    {gtm_body}
     <div class="top-bar">
         <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-direction:row-reverse;">
             <div class="top-bar-contact">
@@ -1043,6 +1045,8 @@ for filename, (title, description, content) in pages.items():
         footer=FOOTER,
         schema=build_schema(filename, title, description),
         analytics=analytics_snippet(),
+        gtm_head=widgets.gtm_head(),
+        gtm_body=widgets.gtm_body(),
         web3forms_key=WEB3FORMS_ACCESS_KEY,
         slug=slug_for(filename),
         video_loader=VIDEO_LOADER,
