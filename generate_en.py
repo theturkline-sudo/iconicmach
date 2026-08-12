@@ -2,6 +2,8 @@ import json
 import os
 import re
 
+import widgets
+
 domain = "https://iconicmach.com"
 
 # Google Analytics 4 — paste the Measurement ID (looks like "G-XXXXXXXXXX")
@@ -15,7 +17,7 @@ WEB3FORMS_ACCESS_KEY = "8fdf1126-4ed7-4dc6-aea5-6714b12d50ad"
 
 # Bump when any file in assets/css or assets/js changes, so returning visitors
 # do not run a stale cached script against newly generated HTML.
-ASSET_VERSION = "2"
+ASSET_VERSION = "3"
 
 
 def analytics_snippet():
@@ -154,6 +156,9 @@ def build_schema(filename, title, description):
             "about": {"@id": domain + "/#organization"},
         },
     ]
+
+    if filename == "index.html":
+        graph.append(widgets.faq_schema_nodes("en", url))
 
     article = ARTICLES_BY_FILE.get(filename)
     if article:
@@ -1014,6 +1019,10 @@ def blog_index():
     </section>'''.format("".join(cards))
 
 
+# Homepage FAQ: the questions clients actually ask, plus FAQPage schema.
+_home = pages['index.html']
+pages['index.html'] = (_home[0], _home[1], _home[2] + widgets.home_faq_section('en'))
+
 pages['blog.html'] = (
     'Blog',
     'Latest articles, insights and news from Iconic Mach Engineering.',
@@ -1124,6 +1133,8 @@ template = """<!DOCTYPE html>
     <script src="../assets/js/main.js?v={asset_version}"></script>
     <script src="../assets/js/animations.js?v={asset_version}"></script>
     <script src="../assets/js/forms.js?v={asset_version}"></script>
+    <script src="../assets/js/chat.js?v={asset_version}" defer></script>
+{floating}
 {video_loader}
 </body>
 </html>"""
@@ -1145,6 +1156,7 @@ for filename, (title, description, content) in pages.items():
         web3forms_key=WEB3FORMS_ACCESS_KEY,
         slug=slug_for(filename),
         video_loader=VIDEO_LOADER,
+        floating=widgets.floating_widgets("en"),
         asset_version=ASSET_VERSION,
     )
     page = prettify_links(page)
