@@ -127,7 +127,7 @@ TOPICS = {
             "label": "Where are you located?",
             "keywords": ["where", "location", "address", "visit", "factory", "office", "egypt", "cairo"],
             "answer": (
-                "Shams Mall, 10th of Ramadan City, Al Sharqiya, Egypt. We serve all of Egypt and the GCC, "
+                "Al Hashemia Mall, Tower (W), 3rd Floor, behind the Vodafone branch, 10th of Ramadan, Al Sharqiya, Egypt. We serve all of Egypt and the GCC, "
                 'and we do site visits before quoting. <a href="contact">Contact details and map</a>.'
             ),
         },
@@ -192,7 +192,7 @@ TOPICS = {
             "label": "أين مقركم؟",
             "keywords": ["أين", "مكان", "عنوان", "موقع", "زيارة", "مصر", "المصنع"],
             "answer": (
-                "مول شمس، العاشر من رمضان، الشرقية، مصر. نخدم جميع أنحاء مصر ودول الخليج، "
+                "مول الهاشمية، برج (و)، الدور الثالث، خلف فرع فودافون، العاشر من رمضان، الشرقية، مصر. نخدم جميع أنحاء مصر ودول الخليج، "
                 'ونقوم بزيارات ميدانية قبل إعداد عرض السعر. <a href="contact">بيانات التواصل والخريطة</a>.'
             ),
         },

@@ -17,7 +17,7 @@ WEB3FORMS_ACCESS_KEY = "8fdf1126-4ed7-4dc6-aea5-6714b12d50ad"
 
 # Bump when any file in assets/css or assets/js changes, so returning visitors
 # do not run a stale cached script against newly generated HTML.
-ASSET_VERSION = "3"
+ASSET_VERSION = "4"
 
 
 def analytics_snippet():
@@ -45,7 +45,7 @@ ORGANIZATION = {
     "telephone": "+20-108-472-717",
     "address": {
         "@type": "PostalAddress",
-        "streetAddress": "مول شمس، العاشر من رمضان",
+        "streetAddress": "مول الهاشمية، برج (و)، الدور الثالث، خلف فرع فودافون، العاشر من رمضان",
         "addressRegion": "الشرقية",
         "addressCountry": "EG",
     },
@@ -346,7 +346,7 @@ FOOTER = '''
                 <div>
                     <h4 style="color:#fff; font-size:1rem; font-weight:600; margin-bottom:18px;">تواصل معنا</h4>
                     <ul style="list-style:none; display:flex; flex-direction:column; gap:12px; font-size:0.9rem;">
-                        <li style="display:flex; gap:10px; align-items:flex-start;"><span style="margin-top:2px;">📍</span><span style="opacity:0.8;">شمس مول، العاشر من رمضان،<br>الشرقية، مصر</span></li>
+                        <li style="display:flex; gap:10px; align-items:flex-start;"><span style="margin-top:2px;">📍</span><span style="opacity:0.8;">العاشر من رمضان – مول الهاشمية<br>برج (و) – الدور الثالث<br>خلف فرع فودافون<br>الشرقية، مصر<br><a href="https://www.google.com/maps/search/?api=1&query=%D9%85%D9%88%D9%84%20%D8%A7%D9%84%D9%87%D8%A7%D8%B4%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D8%B4%D8%B1%20%D9%85%D9%86%20%D8%B1%D9%85%D8%B6%D8%A7%D9%86%20%D8%A7%D9%84%D8%B4%D8%B1%D9%82%D9%8A%D8%A9" target="_blank" rel="noopener" style="color:#4adeae;text-decoration:none;">افتح في خرائط جوجل</a></span></li>
                         <li style="display:flex; gap:10px; align-items:center;"><span>📱</span><a href="https://wa.me/20108472717" style="color:#4adeae; text-decoration:none;" dir="ltr">+20 108 472 717</a></li>
                         <li style="display:flex; gap:10px; align-items:center;"><span>✉️</span><a href="mailto:sales@iconicmach.com" style="color:#4adeae; text-decoration:none;">sales@iconicmach.com</a></li>
                         <li style="display:flex; gap:10px; align-items:center;"><span>🔧</span><a href="mailto:technical@iconicmach.com" style="color:#4adeae; text-decoration:none;">technical@iconicmach.com</a></li>
@@ -524,14 +524,14 @@ pages = {
                     <h2 class="text-primary" style="font-size:1.8rem; margin-bottom:16px;">تواصل معنا</h2>
                     <p style="line-height:1.8; margin-bottom:32px; color:var(--text-muted);">هل لديك مشروع في ذهنك؟ فريقنا الهندسي مستعد للاستشارة وزيارة الموقع وتصميم الحل المثالي.</p>
                     <div style="display:flex; flex-direction:column; gap:20px; margin-bottom:32px;">
-                        <div style="display:flex; align-items:flex-start; gap:16px;"><div style="font-size:1.6rem;line-height:1;">📍</div><div><strong>العنوان</strong><br><span style="color:var(--text-muted);">شمس مول، العاشر من رمضان، الشرقية، مصر</span></div></div>
+                        <div style="display:flex; align-items:flex-start; gap:16px;"><div style="font-size:1.6rem;line-height:1;">📍</div><div><strong>العنوان</strong><br><span style="color:var(--text-muted);">العاشر من رمضان – مول الهاشمية – برج (و) – الدور الثالث – خلف فرع فودافون، الشرقية، مصر<br><a href="https://www.google.com/maps/search/?api=1&query=%D9%85%D9%88%D9%84%20%D8%A7%D9%84%D9%87%D8%A7%D8%B4%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D8%B4%D8%B1%20%D9%85%D9%86%20%D8%B1%D9%85%D8%B6%D8%A7%D9%86%20%D8%A7%D9%84%D8%B4%D8%B1%D9%82%D9%8A%D8%A9" target="_blank" rel="noopener" style="color:var(--primary-blue); font-weight:600; text-decoration:none;">افتح في خرائط جوجل &larr;</a></span></div></div>
                         <div style="display:flex; align-items:flex-start; gap:16px;"><div style="font-size:1.6rem;line-height:1;">📱</div><div><strong>الهاتف / واتساب</strong><br><a href="https://wa.me/20108472717" style="color:var(--primary-blue);text-decoration:none;font-weight:600;" dir="ltr">+20 108 472 717</a></div></div>
                         <div style="display:flex; align-items:flex-start; gap:16px;"><div style="font-size:1.6rem;line-height:1;">✉️</div><div><strong>استفسارات المبيعات</strong><br><a href="mailto:sales@iconicmach.com" style="color:var(--primary-blue);text-decoration:none;">sales@iconicmach.com</a></div></div>
                         <div style="display:flex; align-items:flex-start; gap:16px;"><div style="font-size:1.6rem;line-height:1;">🔧</div><div><strong>الدعم الفني</strong><br><a href="mailto:technical@iconicmach.com" style="color:var(--primary-blue);text-decoration:none;">technical@iconicmach.com</a></div></div>
                     </div>
                     <div style="border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm);">
                         <iframe title="موقع آيكونيك ماشين الهندسية"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13651.989047248354!2d31.7371987!3d30.301314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa9efd409ec5898fb!2z2YXZiNmEINi02YXYsw!5e0!3m2!1sar!2seg!4v1717320000000!5m2!1sar!2seg"
+                            src="https://www.google.com/maps?q=%D9%85%D9%88%D9%84%20%D8%A7%D9%84%D9%87%D8%A7%D8%B4%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D8%B4%D8%B1%20%D9%85%D9%86%20%D8%B1%D9%85%D8%B6%D8%A7%D9%86%20%D8%A7%D9%84%D8%B4%D8%B1%D9%82%D9%8A%D8%A9&output=embed"
                             width="100%" height="300" style="border:0; display:block;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
                     </div>

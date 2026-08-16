@@ -88,6 +88,7 @@ function setupForm(form) {
             // Web3Forms can answer 200 with success:false (e.g. rejected key),
             // so status alone is not enough.
             if (res.ok && body.success !== false) {
+                trackLead(form, lang);
                 form.reset();
                 showStatus(statusEl, t.success, 'success');
             } else {
@@ -102,6 +103,30 @@ function setupForm(form) {
             submitBtn.disabled = false;
         }
     });
+}
+
+// Fires only after Web3Forms confirms delivery, so the count reflects real
+// inquiries rather than clicks on the button. Sent to GA4 directly (gtag) and
+// pushed to the dataLayer so a GTM tag can pick it up too — GA4 is not inside
+// GTM, so these are not duplicates of each other.
+function trackLead(form, lang) {
+    var type = form.dataset.formType === 'quotation' ? 'quotation' : 'contact';
+    var payload = {
+        form_type: type,
+        form_language: lang,
+        page_path: window.location.pathname
+    };
+
+    try {
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'generate_lead', payload);
+        }
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(Object.assign({ event: 'generate_lead' }, payload));
+    } catch (e) {
+        // Never let analytics break the visitor's confirmation.
+        console.error('generate_lead tracking failed:', e);
+    }
 }
 
 function buildPayload(form, f, key, lang) {
