@@ -34,8 +34,12 @@
     var closeBtn = panel.querySelector('.chat-close');
     var started = false;
 
+    // The scroll container is .chat-body (log + quick replies together), so
+    // new messages and the reply buttons stay reachable as one list.
+    var body = panel.querySelector('.chat-body') || log;
+
     function scrollDown() {
-        log.scrollTop = log.scrollHeight;
+        body.scrollTop = body.scrollHeight;
     }
 
     function escapeHtml(s) {
@@ -135,6 +139,7 @@
     function openPanel() {
         panel.setAttribute('data-open', 'true');
         toggle.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('chat-open');
         if (!started) {
             started = true;
             addMessage(DATA.greeting, 'bot');
@@ -147,6 +152,7 @@
     function closePanel() {
         panel.setAttribute('data-open', 'false');
         toggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('chat-open');
         toggle.focus();
     }
 

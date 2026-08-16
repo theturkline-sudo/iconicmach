@@ -238,8 +238,10 @@ def floating_widgets(lang):
             </div>
             <button type="button" class="chat-close" aria-label="{close}">&times;</button>
         </div>
-        <div class="chat-log" role="log" aria-live="polite"></div>
-        <div class="chat-replies"></div>
+        <div class="chat-body">
+            <div class="chat-log" role="log" aria-live="polite"></div>
+            <div class="chat-replies"></div>
+        </div>
         <form class="chat-form" autocomplete="off">
             <input type="text" placeholder="{placeholder}" aria-label="{placeholder}">
             <button type="submit" aria-label="{send}">{send_icon}</button>

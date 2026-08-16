@@ -17,7 +17,7 @@ WEB3FORMS_ACCESS_KEY = "8fdf1126-4ed7-4dc6-aea5-6714b12d50ad"
 
 # Bump when any file in assets/css or assets/js changes, so returning visitors
 # do not run a stale cached script against newly generated HTML.
-ASSET_VERSION = "5"
+ASSET_VERSION = "7"
 
 
 def analytics_snippet():

@@ -282,7 +282,11 @@ textarea.form-control {
     inset-inline-end: 20px;
     z-index: 901;
     width: min(370px, calc(100vw - 40px));
-    max-height: min(560px, calc(100vh - 130px));
+    /* Bounded so the panel can never grow past the viewport. dvh tracks the
+       *visible* height on mobile, where the URL bar collapses and expands;
+       the vh line is the fallback for browsers without dvh. */
+    max-height: calc(100vh - 116px);
+    max-height: min(560px, calc(100dvh - 116px));
     display: none;
     flex-direction: column;
     overflow: hidden;
@@ -321,14 +325,20 @@ textarea.form-control {
 
 .chat-close:hover { opacity: 1; }
 
-.chat-log {
+.chat-body {
     flex: 1;
+    min-height: 0;              /* lets the flex child actually shrink */
     overflow-y: auto;
-    padding: 18px;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    background: var(--bg-alt);
+}
+
+.chat-log {
+    padding: 18px 18px 8px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    background: var(--bg-alt);
 }
 
 .chat-msg {
@@ -378,8 +388,7 @@ textarea.form-control {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    padding: 0 18px 14px;
-    background: var(--bg-alt);
+    padding: 0 18px 16px;
 }
 
 .chat-replies button {
@@ -455,7 +464,31 @@ textarea.form-control {
     .floating-actions a,
     .floating-actions button { width: 46px; height: 46px; }
     .floating-actions [data-label]::after { display: none; }
-    .chat-panel { inset-block-end: 76px; inset-inline-end: 14px; }
+
+    /* Pin to both edges rather than sizing from one, so the panel uses the
+       full width on a phone instead of leaving a dead column. */
+    .chat-panel {
+        inset-block-end: 74px;
+        inset-inline: 12px;
+        width: auto;
+        max-height: calc(100vh - 96px);
+        max-height: calc(100dvh - 96px);
+    }
+    .chat-log { padding: 14px 14px 6px; }
+    .chat-replies { padding: 0 14px 14px; gap: 6px; }
+    .chat-replies button { padding: 6px 12px; font-size: 0.78rem; }
+    .chat-header { padding: 13px 15px; }
+    .chat-msg { max-width: 90%; font-size: 0.88rem; }
+}
+
+/* While the chat is open the panel covers the contact buttons, so hide them
+   rather than leave dead targets underneath. The chat toggle itself stays. */
+body.chat-open .floating-actions a { display: none; }
+
+/* Short viewports (landscape phones): keep the composer reachable. */
+@media (max-height: 520px) {
+    .chat-panel { max-height: calc(100dvh - 84px); inset-block-end: 68px; }
+    .chat-header p { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
