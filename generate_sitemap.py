@@ -21,6 +21,7 @@ PAGES = {
     "about.html": ("monthly", "0.7"),
     "contact.html": ("monthly", "0.7"),
     "blog.html": ("weekly", "0.6"),
+    "sitemap.html": ("monthly", "0.4"),
     "blog-industry-4-0-egypt.html": ("yearly", "0.5"),
     "blog-conveyor-upgrade-signs.html": ("yearly", "0.5"),
     "blog-lean-production-line-waste.html": ("yearly", "0.5"),

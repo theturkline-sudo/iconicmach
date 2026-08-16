@@ -160,6 +160,13 @@ def build_schema(filename, title, description):
     if filename == "index.html":
         graph.append(widgets.faq_schema_nodes("en", url))
 
+    crumb = widgets.breadcrumb_node(
+        'en', filename, domain,
+        widgets.page_title_for('en', slug_for(filename)) or title,
+    )
+    if crumb:
+        graph.append(crumb)
+
     article = ARTICLES_BY_FILE.get(filename)
     if article:
         graph.append(
@@ -352,6 +359,7 @@ FOOTER = '''
                 <div style="display:flex; gap:20px;">
                     <a href="privacy-policy.html" style="color:#c9d8ec; text-decoration:none;">Privacy Policy</a>
                     <a href="terms.html" style="color:#c9d8ec; text-decoration:none;">Terms &amp; Conditions</a>
+                    <a href="sitemap.html" style="color:#c9d8ec; text-decoration:none;">Site Map</a>
                 </div>
             </div>
         </div>
@@ -1028,6 +1036,10 @@ pages['blog.html'] = (
     'Latest articles, insights and news from Iconic Mach Engineering.',
     blog_index(),
 )
+
+# Human-readable site tree.
+page_heroes['sitemap.html'] = ('image', '../assets/images/industrial-process-2.jpeg', 'Site Map', 'Find any page on the site.')
+pages['sitemap.html'] = ('Site Map', 'Every page on iconicmach.com, grouped by section.', widgets.sitemap_page('en'))
 
 for _a in ARTICLES:
     page_heroes[_a['file']] = ('image', _a['image'], _a['title'], _a['excerpt'])

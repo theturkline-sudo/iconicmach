@@ -1,4 +1,71 @@
+# iconicmach.com
+#
+# Everything is open to crawlers, including AI assistants. Cloudflare's
+# "Managed robots.txt" (Zone -> AI Crawl Control -> Signals) used to overwrite
+# this file and Disallow GPTBot, Google-Extended, ClaudeBot, CCBot and others,
+# which kept the site out of ChatGPT and Gemini answers. That toggle is now
+# OFF. If AI assistants stop citing the site, check it has not been re-enabled.
+
 User-agent: *
+Allow: /
+
+# --- AI assistants: explicitly welcome ---------------------------------------
+# Named individually so the intent survives anyone re-reading this file. The
+# search/answer agents matter more than the training ones for being cited.
+
+# OpenAI: OAI-SearchBot surfaces pages in ChatGPT answers, ChatGPT-User fetches
+# a page when a user asks about it, GPTBot is model training.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Google: Google-Extended governs Gemini and AI Overviews grounding. It does
+# NOT affect ordinary Google Search indexing, which Googlebot handles.
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Microsoft Copilot / Bing
+User-agent: bingbot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl — the dataset many models are built from
+User-agent: CCBot
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
 Allow: /
 
 Sitemap: https://iconicmach.com/sitemap.xml

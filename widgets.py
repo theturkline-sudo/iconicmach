@@ -395,3 +395,147 @@ def gtm_body():
         '    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>\n'
         "    <!-- End Google Tag Manager (noscript) -->"
     )
+
+
+# --- Site tree --------------------------------------------------------------
+#
+# URLs are flat (/en/contact, not /en/company/contact), so breadcrumbs stay
+# honest: Home > Page, and Home > Blog > Article for the articles. Claiming a
+# deeper hierarchy than the URLs actually have would be misleading markup.
+#
+# SECTIONS is the grouping used by the human-readable sitemap page only.
+
+SECTIONS = {
+    "en": [
+        ("Products & Services", [
+            ("production-lines", "Production Lines"),
+            ("conveyor-systems", "Conveyor Systems"),
+            ("spare-parts", "Spare Parts"),
+            ("services", "Services"),
+            ("technical-support", "Technical Support"),
+            ("request-quotation", "Request a Quotation"),
+        ]),
+        ("Company", [
+            ("about", "About Us"),
+            ("industries", "Industries We Serve"),
+            ("projects", "Projects"),
+            ("contact", "Contact Us"),
+        ]),
+        ("Resources", [
+            ("blog", "Blog"),
+            ("blog-industry-4-0-egypt", "Industry 4.0 for Egyptian Manufacturers"),
+            ("blog-conveyor-upgrade-signs", "5 Signs Your Conveyor Needs an Upgrade"),
+            ("blog-lean-production-line-waste", "Reducing Waste with Lean Line Design"),
+            ("faq", "Frequently Asked Questions"),
+        ]),
+        ("Legal", [
+            ("privacy-policy", "Privacy Policy"),
+            ("terms", "Terms & Conditions"),
+        ]),
+    ],
+    "ar": [
+        ("المنتجات والخدمات", [
+            ("production-lines", "خطوط الإنتاج"),
+            ("conveyor-systems", "أنظمة السيور الناقلة"),
+            ("spare-parts", "قطع الغيار"),
+            ("services", "خدماتنا"),
+            ("technical-support", "الدعم الفني"),
+            ("request-quotation", "طلب عرض سعر"),
+        ]),
+        ("الشركة", [
+            ("about", "من نحن"),
+            ("industries", "القطاعات التي نخدمها"),
+            ("projects", "المشاريع"),
+            ("contact", "اتصل بنا"),
+        ]),
+        ("مصادر", [
+            ("blog", "المدونة"),
+            ("blog-industry-4-0-egypt", "الصناعة 4.0 للمصنّعين في مصر"),
+            ("blog-conveyor-upgrade-signs", "٥ علامات تدل على حاجة السيور للتطوير"),
+            ("blog-lean-production-line-waste", "تقليل الهدر بالتصميم الرشيق"),
+            ("faq", "الأسئلة الشائعة"),
+        ]),
+        ("قانوني", [
+            ("privacy-policy", "سياسة الخصوصية"),
+            ("terms", "الشروط والأحكام"),
+        ]),
+    ],
+}
+
+SITEMAP_STRINGS = {
+    "en": {
+        "title": "Site Map",
+        "desc": "Every page on iconicmach.com, grouped by section.",
+        "home": "Home",
+        "blog": "Blog",
+    },
+    "ar": {
+        "title": "خريطة الموقع",
+        "desc": "جميع صفحات iconicmach.com مرتبة حسب الأقسام.",
+        "home": "الرئيسية",
+        "blog": "المدونة",
+    },
+}
+
+
+def page_title_for(lang, slug):
+    for _section, items in SECTIONS[lang]:
+        for s, label in items:
+            if s == slug:
+                return label
+    return None
+
+
+def breadcrumb_node(lang, filename, domain, page_title):
+    """BreadcrumbList JSON-LD. Returns None for the homepage."""
+    if filename == "index.html":
+        return None
+
+    slug = filename[: -len(".html")]
+    base = "{}/{}/".format(domain, lang)
+    s = SITEMAP_STRINGS[lang]
+
+    items = [{"@type": "ListItem", "position": 1, "name": s["home"], "item": base}]
+
+    # Articles genuinely sit under the blog listing.
+    if slug.startswith("blog-"):
+        items.append({"@type": "ListItem", "position": 2, "name": s["blog"], "item": base + "blog"})
+        items.append({"@type": "ListItem", "position": 3, "name": page_title, "item": base + slug})
+    else:
+        items.append({"@type": "ListItem", "position": 2, "name": page_title, "item": base + slug})
+
+    return {
+        "@type": "BreadcrumbList",
+        "@id": base + slug + "#breadcrumb",
+        "itemListElement": items,
+    }
+
+
+def sitemap_page(lang):
+    """Human-readable site tree."""
+    s = SITEMAP_STRINGS[lang]
+    blocks = []
+    for section, items in SECTIONS[lang]:
+        links = "".join(
+            '\n                    <li style="margin-bottom:10px;"><a href="{slug}" style="color:var(--primary-blue); text-decoration:none; font-weight:500;">{label}</a></li>'.format(
+                slug=slug, label=label
+            )
+            for slug, label in items
+        )
+        blocks.append(
+            '''
+                <div>
+                    <h2 style="font-size:1.15rem; margin-bottom:16px; padding-bottom:10px; border-block-end:2px solid var(--primary-blue);">{section}</h2>
+                    <ul style="list-style:none; padding:0;">{links}
+                    </ul>
+                </div>'''.format(section=section, links=links)
+        )
+
+    return '''
+    <section id="main-content" class="section">
+        <div class="container" style="max-width:900px;">
+            <p class="text-muted" style="text-align:center; line-height:1.8; margin-bottom:48px;">{desc}</p>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:40px;">{blocks}
+            </div>
+        </div>
+    </section>'''.format(desc=s["desc"], blocks="".join(blocks))
