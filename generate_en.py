@@ -17,7 +17,7 @@ WEB3FORMS_ACCESS_KEY = "8fdf1126-4ed7-4dc6-aea5-6714b12d50ad"
 
 # Bump when any file in assets/css or assets/js changes, so returning visitors
 # do not run a stale cached script against newly generated HTML.
-ASSET_VERSION = "4"
+ASSET_VERSION = "5"
 
 
 def analytics_snippet():
@@ -42,13 +42,19 @@ ORGANIZATION = {
     "image": domain + "/assets/images/iconicmach.png",
     "description": "Design, manufacture and installation of production lines, conveyor systems and industrial automation across Egypt and the GCC.",
     "email": "sales@iconicmach.com",
-    "telephone": "+20-108-472-717",
+    "telephone": "+20-10-68472717",
     "address": {
         "@type": "PostalAddress",
         "streetAddress": "Al Hashemia Mall, Tower W, 3rd Floor, behind the Vodafone branch, 10th of Ramadan City",
         "addressRegion": "Al Sharqiya",
         "addressCountry": "EG",
     },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 30.2930808,
+        "longitude": 31.7461565,
+    },
+    "hasMap": "https://www.google.com/maps/place/El+Hashemeya+Market+Centre/@30.2930808,31.7461565,18z/data=!4m6!3m5!1s0x1457fd95bdb45c5d:0xebe21a3cdcc6d742!8m2!3d30.2930808!4d31.7461565!16s%2Fg%2F1pty73hds",
     "areaServed": ["EG", "SA", "AE", "KW", "QA", "OM", "BH"],
     "sameAs": [
         "https://www.instagram.com/iconic.mach/",
@@ -61,7 +67,7 @@ ORGANIZATION = {
         {
             "@type": "ContactPoint",
             "contactType": "sales",
-            "telephone": "+20-108-472-717",
+            "telephone": "+20-10-68472717",
             "email": "sales@iconicmach.com",
             "availableLanguage": ["en", "ar"],
         },
@@ -317,7 +323,7 @@ FOOTER = '''
                         <a href="https://www.facebook.com/profile.php?id=61590558549282" target="_blank" aria-label="Facebook" title="Facebook" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#c9d8ec;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='#1877f2';" onmouseout="this.style.background='rgba(255,255,255,0.08)';"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
                         <a href="https://www.linkedin.com/in/mahmoud-turk-82bbb8412/" target="_blank" aria-label="LinkedIn" title="LinkedIn" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#c9d8ec;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='#0077b5';" onmouseout="this.style.background='rgba(255,255,255,0.08)';"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
                         <a href="https://www.youtube.com/@Iconicmach" target="_blank" aria-label="YouTube" title="YouTube" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#c9d8ec;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='#ff0000';" onmouseout="this.style.background='rgba(255,255,255,0.08)';"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-                        <a href="https://wa.me/20108472717" target="_blank" aria-label="WhatsApp" title="WhatsApp" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#c9d8ec;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='#25d366';" onmouseout="this.style.background='rgba(255,255,255,0.08)';"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+                        <a href="https://wa.me/201068472717" target="_blank" aria-label="WhatsApp" title="WhatsApp" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#c9d8ec;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='#25d366';" onmouseout="this.style.background='rgba(255,255,255,0.08)';"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
                     </div>
                 </div>
                 <!-- Products -->
@@ -346,8 +352,8 @@ FOOTER = '''
                 <div>
                     <h4 style="color:#fff; font-size:1rem; font-weight:600; margin-bottom:18px; letter-spacing:0.5px;">Contact</h4>
                     <ul style="list-style:none; display:flex; flex-direction:column; gap:12px; font-size:0.9rem;">
-                        <li style="display:flex; gap:10px; align-items:flex-start;"><span style="margin-top:2px;">📍</span><span style="opacity:0.8;">10th of Ramadan &ndash; Al Hashemia Mall<br>Tower (W) &ndash; 3rd Floor<br>Behind the Vodafone branch<br>Al Sharqiya, Egypt<br><a href="https://www.google.com/maps/search/?api=1&query=%D9%85%D9%88%D9%84%20%D8%A7%D9%84%D9%87%D8%A7%D8%B4%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D8%B4%D8%B1%20%D9%85%D9%86%20%D8%B1%D9%85%D8%B6%D8%A7%D9%86%20%D8%A7%D9%84%D8%B4%D8%B1%D9%82%D9%8A%D8%A9" target="_blank" rel="noopener" style="color:#4adeae; text-decoration:none;">Open in Google Maps</a></span></li>
-                        <li style="display:flex; gap:10px; align-items:center;"><span>📱</span><a href="https://wa.me/20108472717" style="color:#4adeae; text-decoration:none;">+20 108 472 717</a></li>
+                        <li style="display:flex; gap:10px; align-items:flex-start;"><span style="margin-top:2px;">📍</span><span style="opacity:0.8;">10th of Ramadan &ndash; Al Hashemia Mall<br>Tower (W) &ndash; 3rd Floor<br>Behind the Vodafone branch<br>Al Sharqiya, Egypt<br><a href="https://www.google.com/maps/place/El+Hashemeya+Market+Centre/@30.2930808,31.7461565,18z/data=!4m6!3m5!1s0x1457fd95bdb45c5d:0xebe21a3cdcc6d742!8m2!3d30.2930808!4d31.7461565!16s%2Fg%2F1pty73hds" target="_blank" rel="noopener" style="color:#4adeae; text-decoration:none;">Open in Google Maps</a></span></li>
+                        <li style="display:flex; gap:10px; align-items:center;"><span>📱</span><a href="https://wa.me/201068472717" style="color:#4adeae; text-decoration:none;">+20 10 68472717</a></li>
                         <li style="display:flex; gap:10px; align-items:center;"><span>✉️</span><a href="mailto:sales@iconicmach.com" style="color:#4adeae; text-decoration:none;">sales@iconicmach.com</a></li>
                         <li style="display:flex; gap:10px; align-items:center;"><span>🔧</span><a href="mailto:technical@iconicmach.com" style="color:#4adeae; text-decoration:none;">technical@iconicmach.com</a></li>
                     </ul>
@@ -564,11 +570,11 @@ pages = {
                     <div style="display:flex; flex-direction:column; gap:20px; margin-bottom:32px;">
                         <div style="display:flex; align-items:flex-start; gap:16px;">
                             <div style="font-size:1.6rem; line-height:1;">📍</div>
-                            <div><strong>Address</strong><br><span style="color:var(--text-muted);">10th of Ramadan &ndash; Al Hashemia Mall &ndash; Tower (W) &ndash; 3rd Floor &ndash; behind the Vodafone branch, Al Sharqiya, Egypt<br><a href="https://www.google.com/maps/search/?api=1&query=%D9%85%D9%88%D9%84%20%D8%A7%D9%84%D9%87%D8%A7%D8%B4%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D8%B4%D8%B1%20%D9%85%D9%86%20%D8%B1%D9%85%D8%B6%D8%A7%D9%86%20%D8%A7%D9%84%D8%B4%D8%B1%D9%82%D9%8A%D8%A9" target="_blank" rel="noopener" style="color:var(--primary-blue); font-weight:600; text-decoration:none;">Open in Google Maps &rarr;</a></span></div>
+                            <div><strong>Address</strong><br><span style="color:var(--text-muted);">10th of Ramadan &ndash; Al Hashemia Mall &ndash; Tower (W) &ndash; 3rd Floor &ndash; behind the Vodafone branch, Al Sharqiya, Egypt<br><a href="https://www.google.com/maps/place/El+Hashemeya+Market+Centre/@30.2930808,31.7461565,18z/data=!4m6!3m5!1s0x1457fd95bdb45c5d:0xebe21a3cdcc6d742!8m2!3d30.2930808!4d31.7461565!16s%2Fg%2F1pty73hds" target="_blank" rel="noopener" style="color:var(--primary-blue); font-weight:600; text-decoration:none;">Open in Google Maps &rarr;</a></span></div>
                         </div>
                         <div style="display:flex; align-items:flex-start; gap:16px;">
                             <div style="font-size:1.6rem; line-height:1;">📱</div>
-                            <div><strong>Phone / WhatsApp</strong><br><a href="https://wa.me/20108472717" style="color:var(--primary-blue); text-decoration:none; font-weight:600;">+20 108 472 717</a></div>
+                            <div><strong>Phone / WhatsApp</strong><br><a href="https://wa.me/201068472717" style="color:var(--primary-blue); text-decoration:none; font-weight:600;">+20 10 68472717</a></div>
                         </div>
                         <div style="display:flex; align-items:flex-start; gap:16px;">
                             <div style="font-size:1.6rem; line-height:1;">✉️</div>
@@ -583,7 +589,7 @@ pages = {
                     <div style="border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm);">
                         <iframe
                             title="Iconic Mach Engineering Location"
-                            src="https://www.google.com/maps?q=%D9%85%D9%88%D9%84%20%D8%A7%D9%84%D9%87%D8%A7%D8%B4%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D8%B4%D8%B1%20%D9%85%D9%86%20%D8%B1%D9%85%D8%B6%D8%A7%D9%86%20%D8%A7%D9%84%D8%B4%D8%B1%D9%82%D9%8A%D8%A9&output=embed"
+                            src="https://www.google.com/maps?q=30.2930808,31.7461565&z=18&output=embed"
                             width="100%" height="300" style="border:0; display:block;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
                     </div>
@@ -768,7 +774,7 @@ pages = {
                         <li style="display:flex; gap:12px; align-items:flex-start;"><span style="color:var(--primary-blue); font-weight:700; font-size:1.2rem;">✓</span> Emergency spare parts delivery</li>
                         <li style="display:flex; gap:12px; align-items:flex-start;"><span style="color:var(--primary-blue); font-weight:700; font-size:1.2rem;">✓</span> Annual Maintenance Contracts (AMC)</li>
                     </ul>
-                    <a href="https://wa.me/20108472717" class="btn btn-primary" style="padding:14px 28px; text-decoration:none;">WhatsApp Support Now</a>
+                    <a href="https://wa.me/201068472717" class="btn btn-primary" style="padding:14px 28px; text-decoration:none;">WhatsApp Support Now</a>
                 </div>
                 <div><img src="../assets/images/industrial-process-5.jpeg" alt="Technical Support" style="width:100%; border-radius:var(--radius-md); box-shadow:var(--shadow-sm);"></div>
             </div>
@@ -996,7 +1002,7 @@ def article_page(a):
                 <p style="color:var(--text-muted); line-height:1.8; margin-bottom:24px;">Our engineers can review your current line and advise on the most cost-effective route forward &mdash; no obligation.</p>
                 <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
                     <a href="request-quotation.html" class="btn btn-primary" style="padding:13px 28px; text-decoration:none;">Request a Quotation</a>
-                    <a href="https://wa.me/20108472717" target="_blank" rel="noopener" style="padding:13px 28px; border:1px solid var(--border-color); border-radius:var(--radius-sm); text-decoration:none; color:inherit;">Ask on WhatsApp</a>
+                    <a href="https://wa.me/201068472717" target="_blank" rel="noopener" style="padding:13px 28px; border:1px solid var(--border-color); border-radius:var(--radius-sm); text-decoration:none; color:inherit;">Ask on WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -1100,8 +1106,8 @@ template = """<!DOCTYPE html>
     <div class="top-bar">
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <div class="top-bar-contact">
-                <a href="https://wa.me/20108472717" target="_blank" rel="noopener" style="margin-right: 15px;">
-                    <span>📱</span> +20 108 472 717
+                <a href="https://wa.me/201068472717" target="_blank" rel="noopener" style="margin-right: 15px;">
+                    <span>📱</span> +20 10 68472717
                 </a>
                 <a href="mailto:sales@iconicmach.com" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">
                     <span>✉️</span> sales@iconicmach.com

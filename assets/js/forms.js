@@ -16,14 +16,14 @@ const STRINGS = {
         badEmail: 'Please enter a valid email address.',
         sending: 'Sending...',
         success: 'Thank you! Your message has been sent. Our team will get back to you within one business day.',
-        failure: 'Sorry, something went wrong. Please try again, or reach us on WhatsApp at +20 108 472 717.'
+        failure: 'Sorry, something went wrong. Please try again, or reach us on WhatsApp at +20 10 68472717.'
     },
     ar: {
         required: 'يرجى ملء جميع الحقول المطلوبة.',
         badEmail: 'يرجى إدخال بريد إلكتروني صحيح.',
         sending: 'جارٍ الإرسال...',
         success: 'شكراً لك! تم إرسال رسالتك بنجاح. سيتواصل معك فريقنا خلال يوم عمل واحد.',
-        failure: 'عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى أو التواصل معنا عبر واتساب على 717 472 108 20+.'
+        failure: 'عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى أو التواصل معنا عبر واتساب على 71768472 10 20+.'
     }
 };
 

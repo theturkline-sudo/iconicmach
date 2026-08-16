@@ -11,9 +11,9 @@ from a keyword-matched topic list and hands off to WhatsApp otherwise.
 
 import json
 
-PHONE_E164 = "+20108472717"
-PHONE_DISPLAY = "+20 108 472 717"
-WHATSAPP_URL = "https://wa.me/20108472717"
+PHONE_E164 = "+201068472717"
+PHONE_DISPLAY = "+20 10 68472717"
+WHATSAPP_URL = "https://wa.me/201068472717"
 SALES_EMAIL = "sales@iconicmach.com"
 
 ICONS = {
