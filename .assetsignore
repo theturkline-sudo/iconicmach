@@ -1,0 +1,35 @@
+# Files Wrangler must NOT upload as public static assets.
+#
+# wrangler.jsonc sets assets.directory to "." — the whole repository. Cloudflare
+# Pages used to exclude .git automatically; Workers does NOT, so without this
+# file https://iconicmach.com/.git/config was publicly readable and the entire
+# git history (including every past version of every file) could be cloned by
+# anyone. It also meant ~890 extra files and ~139 MB uploaded on every deploy.
+#
+# Syntax is the same as .gitignore.
+
+# --- version control: the serious one ---------------------------------------
+.git
+.github
+
+# --- build tooling and source: no reason to be public -----------------------
+.claude
+scripts
+content
+*.py
+CLAUDE.md
+SETUP.md
+wrangler.jsonc
+.assetsignore
+
+# --- editor / OS noise ------------------------------------------------------
+node_modules
+.DS_Store
+Thumbs.db
+*.code-workspace
+.vscode
+.idea
+
+# Everything else is the site itself and must stay:
+#   index.html, 404.html, en/, ar/, assets/, robots.txt, sitemap.xml,
+#   site.webmanifest, _headers
