@@ -835,12 +835,14 @@ template = """<!DOCTYPE html>
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ar_EG">
     <meta property="og:locale:alternate" content="en_US">
-    <meta property="og:image" content="{domain}/assets/images/iconicmach.png">
+    <meta property="og:image" content="{domain}/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="آيكونيك ماشين الهندسية">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{title} | آيكونيك ماشين الهندسية">
     <meta name="twitter:description" content="{description}">
-    <meta name="twitter:image" content="{domain}/assets/images/iconicmach.png">
+    <meta name="twitter:image" content="{domain}/assets/images/og-image.png">
     <meta name="theme-color" content="#0a3150">
     <meta name="google-site-verification" content="ZxGmIEGYMqXTRKbL504-jNNkEfy4EMSgmGBTkjyf20Y">
     <link rel="manifest" href="../site.webmanifest">
