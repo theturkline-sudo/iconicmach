@@ -4,6 +4,9 @@ Run after generate_en.py / generate_ar.py:  python generate_sitemap.py
 """
 import datetime
 import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 domain = "https://iconicmach.com"
 
@@ -22,13 +25,20 @@ PAGES = {
     "contact.html": ("monthly", "0.7"),
     "blog.html": ("weekly", "0.6"),
     "sitemap.html": ("monthly", "0.4"),
-    "blog-industry-4-0-egypt.html": ("yearly", "0.5"),
-    "blog-conveyor-upgrade-signs.html": ("yearly", "0.5"),
-    "blog-lean-production-line-waste.html": ("yearly", "0.5"),
     "faq.html": ("monthly", "0.6"),
     "privacy-policy.html": ("yearly", "0.3"),
     "terms.html": ("yearly", "0.3"),
 }
+
+
+# Articles are discovered from content/<lang>/*.json rather than listed here,
+# so a new article appears in the sitemap the moment its content file exists.
+# Both languages are checked, since a translation may exist on only one side.
+import articles as _articles
+
+for _lang in ("en", "ar"):
+    for _a in _articles.load(_lang):
+        PAGES.setdefault(_a["file"], ("yearly", "0.5"))
 
 
 def loc(lang, filename):
