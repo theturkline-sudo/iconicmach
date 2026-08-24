@@ -9,38 +9,217 @@
     "feasibility": "request-quotation"
   },
   "topics": [
-    {"keyword": "خط إنتاج المياه المعدنية", "cluster": "production-lines", "intent": "commercial", "priority": 1, "status": "done", "slug": "water-bottling-production-line"},
-
-    {"keyword": "خط إنتاج العصائر", "cluster": "production-lines", "intent": "commercial", "priority": 1, "status": "todo"},
-    {"keyword": "خط تعبئة الزيوت", "cluster": "production-lines", "intent": "commercial", "priority": 1, "status": "todo"},
-    {"keyword": "أنواع السيور الناقلة", "cluster": "conveyors", "intent": "informational", "priority": 1, "status": "todo"},
-    {"keyword": "خط إنتاج الألبان", "cluster": "production-lines", "intent": "commercial", "priority": 1, "status": "todo"},
-    {"keyword": "ماكينة تعبئة وتغليف", "cluster": "production-lines", "intent": "commercial", "priority": 1, "status": "todo"},
-    {"keyword": "أتمتة خطوط الإنتاج", "cluster": "automation", "intent": "commercial", "priority": 1, "status": "todo"},
-
-    {"keyword": "خط تعبئة المنظفات", "cluster": "production-lines", "intent": "commercial", "priority": 2, "status": "todo"},
-    {"keyword": "سيور ناقلة للمصانع", "cluster": "conveyors", "intent": "commercial", "priority": 2, "status": "todo"},
-    {"keyword": "صيانة السيور الناقلة", "cluster": "maintenance", "intent": "informational", "priority": 2, "status": "todo"},
-    {"keyword": "تحديث خطوط الإنتاج القديمة", "cluster": "automation", "intent": "commercial", "priority": 2, "status": "todo"},
-    {"keyword": "قطع غيار خطوط الإنتاج", "cluster": "spare-parts", "intent": "commercial", "priority": 2, "status": "todo"},
-    {"keyword": "الصيانة الوقائية للمعدات الصناعية", "cluster": "maintenance", "intent": "informational", "priority": 2, "status": "todo"},
-    {"keyword": "خط إنتاج المكرونة", "cluster": "production-lines", "intent": "commercial", "priority": 2, "status": "todo"},
-    {"keyword": "اشتراطات هيئة سلامة الغذاء للمصانع", "cluster": "feasibility", "intent": "informational", "priority": 2, "status": "todo"},
-    {"keyword": "تكلفة إنشاء مصنع في مصر", "cluster": "feasibility", "intent": "commercial", "priority": 2, "status": "todo"},
-
-    {"keyword": "حساب طول السير الناقل", "cluster": "conveyors", "intent": "informational", "priority": 3, "status": "todo"},
-    {"keyword": "أسباب توقف خط الإنتاج", "cluster": "maintenance", "intent": "informational", "priority": 3, "status": "todo"},
-    {"keyword": "أنظمة PLC في المصانع", "cluster": "automation", "intent": "informational", "priority": 3, "status": "todo"},
-    {"keyword": "خط إنتاج الشيبسي", "cluster": "production-lines", "intent": "commercial", "priority": 3, "status": "todo"},
-    {"keyword": "ماكينة لصق الليبل", "cluster": "production-lines", "intent": "commercial", "priority": 3, "status": "todo"},
-    {"keyword": "سير ناقل حزام مطاطي", "cluster": "conveyors", "intent": "commercial", "priority": 3, "status": "todo"},
-    {"keyword": "OEE الفعالية الإجمالية للمعدات", "cluster": "automation", "intent": "informational", "priority": 3, "status": "todo"},
-    {"keyword": "تخطيط مصنع وتوزيع المعدات", "cluster": "feasibility", "intent": "informational", "priority": 3, "status": "todo"},
-    {"keyword": "ماكينة نفخ الزجاجات", "cluster": "production-lines", "intent": "commercial", "priority": 3, "status": "todo"},
-    {"keyword": "أنظمة الفرز الأوتوماتيكي", "cluster": "automation", "intent": "commercial", "priority": 3, "status": "todo"},
-    {"keyword": "عقود الصيانة السنوية للمصانع", "cluster": "maintenance", "intent": "commercial", "priority": 3, "status": "todo"},
-    {"keyword": "خط إنتاج الصلصة والمعلبات", "cluster": "production-lines", "intent": "commercial", "priority": 3, "status": "todo"},
-    {"keyword": "ناقل أسطواني (رولر كونفيير)", "cluster": "conveyors", "intent": "commercial", "priority": 3, "status": "todo"},
-    {"keyword": "اختيار سعة خط الإنتاج المناسبة", "cluster": "feasibility", "intent": "informational", "priority": 3, "status": "todo"}
+    {
+      "keyword": "خط إنتاج المياه المعدنية",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "priority": 1,
+      "status": "done",
+      "slug": "water-bottling-production-line"
+    },
+    {
+      "keyword": "خط إنتاج العصائر",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "priority": 1,
+      "status": "done",
+      "slug": "juice-production-line"
+    },
+    {
+      "keyword": "خط تعبئة الزيوت",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "priority": 1,
+      "status": "todo"
+    },
+    {
+      "keyword": "أنواع السيور الناقلة",
+      "cluster": "conveyors",
+      "intent": "informational",
+      "priority": 1,
+      "status": "todo"
+    },
+    {
+      "keyword": "خط إنتاج الألبان",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "priority": 1,
+      "status": "todo"
+    },
+    {
+      "keyword": "ماكينة تعبئة وتغليف",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "priority": 1,
+      "status": "todo"
+    },
+    {
+      "keyword": "أتمتة خطوط الإنتاج",
+      "cluster": "automation",
+      "intent": "commercial",
+      "priority": 1,
+      "status": "todo"
+    },
+    {
+      "keyword": "خط تعبئة المنظفات",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "priority": 2,
+      "status": "todo"
+    },
+    {
+      "keyword": "سيور ناقلة للمصانع",
+      "cluster": "conveyors",
+      "intent": "commercial",
+      "priority": 2,
+      "status": "todo"
+    },
+    {
+      "keyword": "صيانة السيور الناقلة",
+      "cluster": "maintenance",
+      "intent": "informational",
+      "priority": 2,
+      "status": "todo"
+    },
+    {
+      "keyword": "تحديث خطوط الإنتاج القديمة",
+      "cluster": "automation",
+      "intent": "commercial",
+      "priority": 2,
+      "status": "todo"
+    },
+    {
+      "keyword": "قطع غيار خطوط الإنتاج",
+      "cluster": "spare-parts",
+      "intent": "commercial",
+      "priority": 2,
+      "status": "todo"
+    },
+    {
+      "keyword": "الصيانة الوقائية للمعدات الصناعية",
+      "cluster": "maintenance",
+      "intent": "informational",
+      "priority": 2,
+      "status": "todo"
+    },
+    {
+      "keyword": "خط إنتاج المكرونة",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "priority": 2,
+      "status": "todo"
+    },
+    {
+      "keyword": "اشتراطات هيئة سلامة الغذاء للمصانع",
+      "cluster": "feasibility",
+      "intent": "informational",
+      "priority": 2,
+      "status": "todo"
+    },
+    {
+      "keyword": "تكلفة إنشاء مصنع في مصر",
+      "cluster": "feasibility",
+      "intent": "commercial",
+      "priority": 2,
+      "status": "todo"
+    },
+    {
+      "keyword": "حساب طول السير الناقل",
+      "cluster": "conveyors",
+      "intent": "informational",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "أسباب توقف خط الإنتاج",
+      "cluster": "maintenance",
+      "intent": "informational",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "أنظمة PLC في المصانع",
+      "cluster": "automation",
+      "intent": "informational",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "خط إنتاج الشيبسي",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "ماكينة لصق الليبل",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "سير ناقل حزام مطاطي",
+      "cluster": "conveyors",
+      "intent": "commercial",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "OEE الفعالية الإجمالية للمعدات",
+      "cluster": "automation",
+      "intent": "informational",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "تخطيط مصنع وتوزيع المعدات",
+      "cluster": "feasibility",
+      "intent": "informational",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "ماكينة نفخ الزجاجات",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "أنظمة الفرز الأوتوماتيكي",
+      "cluster": "automation",
+      "intent": "commercial",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "عقود الصيانة السنوية للمصانع",
+      "cluster": "maintenance",
+      "intent": "commercial",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "خط إنتاج الصلصة والمعلبات",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "ناقل أسطواني (رولر كونفيير)",
+      "cluster": "conveyors",
+      "intent": "commercial",
+      "priority": 3,
+      "status": "todo"
+    },
+    {
+      "keyword": "اختيار سعة خط الإنتاج المناسبة",
+      "cluster": "feasibility",
+      "intent": "informational",
+      "priority": 3,
+      "status": "todo"
+    }
   ]
 }
