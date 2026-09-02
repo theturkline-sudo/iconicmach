@@ -155,6 +155,15 @@
         <priority>0.5</priority>
     </url>
     <url>
+        <loc>https://iconicmach.com/ar/blog-dairy-production-line</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog-dairy-production-line"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog-dairy-production-line"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/blog-dairy-production-line"/>
+        <lastmod>2026-09-02</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://iconicmach.com/ar/blog-oil-filling-line</loc>
         <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog-oil-filling-line"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog-oil-filling-line"/>
@@ -357,6 +366,15 @@
         <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog-conveyor-belt-types"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog-conveyor-belt-types"/>
         <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/blog-conveyor-belt-types"/>
+        <lastmod>2026-09-02</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://iconicmach.com/en/blog-dairy-production-line</loc>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://iconicmach.com/ar/blog-dairy-production-line"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://iconicmach.com/en/blog-dairy-production-line"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://iconicmach.com/en/blog-dairy-production-line"/>
         <lastmod>2026-09-02</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
