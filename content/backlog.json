@@ -38,7 +38,8 @@
       "cluster": "conveyors",
       "intent": "informational",
       "priority": 1,
-      "status": "todo"
+      "status": "done",
+      "slug": "conveyor-belt-types"
     },
     {
       "keyword": "خط إنتاج الألبان",
