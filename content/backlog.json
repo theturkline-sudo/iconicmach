@@ -54,7 +54,8 @@
       "cluster": "production-lines",
       "intent": "commercial",
       "priority": 1,
-      "status": "todo"
+      "status": "done",
+      "slug": "packaging-machine-types"
     },
     {
       "keyword": "أتمتة خطوط الإنتاج",
