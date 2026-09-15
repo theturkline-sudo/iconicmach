@@ -62,7 +62,8 @@
       "cluster": "automation",
       "intent": "commercial",
       "priority": 1,
-      "status": "todo"
+      "status": "done",
+      "slug": "production-line-automation"
     },
     {
       "keyword": "خط تعبئة المنظفات",
