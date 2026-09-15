@@ -13,7 +13,13 @@ Work from the repository at
 
 ## Stop conditions — check these first
 
-Abort the run and report, without publishing, if any hold:
+First, `git pull origin main`. A separate automated workflow (n8n, weekly)
+replenishes `content/backlog.json` independently by committing straight to
+`main`, so the local checkout can be behind before this run even starts. Pull
+before touching anything else, or this run works from a stale backlog and its
+own push can conflict with or shadow topics the other workflow already added.
+
+Then abort the run and report, without publishing, if any of these hold:
 
 - `python scripts/next_topic.py` exits **3** (backlog empty). Do not invent a
   topic. Report that the backlog needs restocking.
