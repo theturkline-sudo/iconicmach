@@ -225,6 +225,62 @@
       "intent": "informational",
       "priority": 3,
       "status": "todo"
+    },
+    {
+      "keyword": "خط إنتاج الأعلاف الحيوانية",
+      "cluster": "production-lines",
+      "intent": "informational",
+      "status": "todo",
+      "priority": 4
+    },
+    {
+      "keyword": "سيور ناقلة مقاومة للحرارة",
+      "cluster": "conveyors",
+      "intent": "informational",
+      "status": "todo",
+      "priority": 5
+    },
+    {
+      "keyword": "ماكينة تعبئة السائل اللزج",
+      "cluster": "production-lines",
+      "intent": "commercial",
+      "status": "todo",
+      "priority": 6
+    },
+    {
+      "keyword": "صيانة سيور الناقلة الهيدروليكية",
+      "cluster": "maintenance",
+      "intent": "informational",
+      "status": "todo",
+      "priority": 7
+    },
+    {
+      "keyword": "كيفية اختيار محرك سير ناقل",
+      "cluster": "conveyors",
+      "intent": "informational",
+      "status": "todo",
+      "priority": 8
+    },
+    {
+      "keyword": "عقود توريد قطع غيار سيور ناقلة",
+      "cluster": "spare-parts",
+      "intent": "transactional",
+      "status": "todo",
+      "priority": 9
+    },
+    {
+      "keyword": "دراسة جدوى خط إنتاج معلبات",
+      "cluster": "feasibility",
+      "intent": "informational",
+      "status": "todo",
+      "priority": 10
+    },
+    {
+      "keyword": "حساب استهلاك الطاقة لخط الإنتاج",
+      "cluster": "production-lines",
+      "intent": "informational",
+      "status": "todo",
+      "priority": 11
     }
   ]
 }
