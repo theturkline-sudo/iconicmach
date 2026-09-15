@@ -9,7 +9,7 @@ Publish **one** article per run, in Arabic and English, and deploy it. This
 runs unattended, so the rules below are hard constraints, not preferences.
 
 Work from the repository at
-`C:\Users\pc shop\Desktop\Folders\Projects\iconicmach`.
+`C:\Users\pc shop\Desktop\Projects\iconicmach`.
 
 ## Stop conditions — check these first
 
