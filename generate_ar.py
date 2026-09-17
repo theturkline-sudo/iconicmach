@@ -3,6 +3,7 @@ import os
 import re
 
 import articles
+import legal
 import widgets
 
 domain = "https://iconicmach.com"
@@ -18,7 +19,7 @@ WEB3FORMS_ACCESS_KEY = "8fdf1126-4ed7-4dc6-aea5-6714b12d50ad"
 
 # Bump when any file in assets/css or assets/js changes, so returning visitors
 # do not run a stale cached script against newly generated HTML.
-ASSET_VERSION = "7"
+ASSET_VERSION = "8"
 
 
 def analytics_snippet():
@@ -704,37 +705,6 @@ pages = {
         </div>
     </section>'''),
 
-    'privacy-policy.html': ('سياسة الخصوصية', 'سياسة الخصوصية لشركة آيكونيك ماشين الهندسية.', '''
-    <section id="main-content" class="section">
-        <div class="container" style="max-width:800px;">
-            <div class="card bg-main" style="padding:40px;box-shadow:var(--shadow-sm);">
-                <h2 class="text-primary" style="margin-bottom:20px;">خصوصيتك تهمنا</h2>
-                <p style="line-height:1.8;margin-bottom:16px;">تلتزم آيكونيك ماشين الهندسية بحماية بياناتك الشخصية. نجمع فقط البيانات الضرورية للرد على استفساراتك وتحسين خدماتنا.</p>
-                <h3 style="margin:24px 0 10px;">ما نجمعه</h3>
-                <p style="line-height:1.8;margin-bottom:16px;">الاسم والبريد الإلكتروني ورقم الهاتف وتفاصيل المشروع المقدمة عبر نماذج التواصل أو عروض الأسعار.</p>
-                <h3 style="margin:24px 0 10px;">كيف نستخدمه</h3>
-                <p style="line-height:1.8;margin-bottom:16px;">تُستخدم بياناتك فقط للرد على استفساراتك، وحيث يتم الموافقة، لإرسال تحديثات هندسية ذات صلة. لا تُباع لأطراف ثالثة قط.</p>
-                <h3 style="margin:24px 0 10px;">تواصل معنا</h3>
-                <p style="line-height:1.8;">لأي استفسارات تتعلق بالخصوصية، يُرجى مراسلتنا على <a href="mailto:sales@iconicmach.com" style="color:var(--primary-blue);">sales@iconicmach.com</a>.</p>
-            </div>
-        </div>
-    </section>'''),
-
-    'terms.html': ('الشروط والأحكام', 'الشروط والأحكام الخاصة بشركة آيكونيك ماشين الهندسية.', '''
-    <section id="main-content" class="section">
-        <div class="container" style="max-width:800px;">
-            <div class="card bg-main" style="padding:40px;box-shadow:var(--shadow-sm);">
-                <h2 class="text-primary" style="margin-bottom:20px;">الشروط والأحكام</h2>
-                <p style="line-height:1.8;margin-bottom:16px;">بالتعامل مع آيكونيك ماشين الهندسية للمنتجات أو الخدمات، فإنك توافق على الشروط التالية التي تحكم استخدام موقعنا وعروض الأسعار والعقود والتركيبات.</p>
-                <h3 style="margin:24px 0 10px;">عروض الأسعار</h3>
-                <p style="line-height:1.8;margin-bottom:16px;">جميع عروض الأسعار سارية لمدة 30 يوماً من تاريخ الإصدار ما لم يُذكر خلاف ذلك. الأسعار عرضة للتغيير بسبب تذبذب أسعار المواد والعملات.</p>
-                <h3 style="margin:24px 0 10px;">الضمانات</h3>
-                <p style="line-height:1.8;margin-bottom:16px;">تحمل جميع الأنظمة المصنوعة ضماناً لمدة 12 شهراً ضد عيوب المواد والتصنيع من تاريخ التشغيل.</p>
-                <h3 style="margin:24px 0 10px;">الملكية الفكرية</h3>
-                <p style="line-height:1.8;">جميع الرسومات الهندسية والتصاميم والوثائق التي ينتجها تبقى ملكاً فكرياً لنا ما لم يتم نقلها صراحةً كتابياً.</p>
-            </div>
-        </div>
-    </section>'''),
 }
 
 # ---------------------------------------------------------------------------
@@ -806,6 +776,10 @@ pages['blog.html'] = (
     'أحدث المقالات والرؤى والأخبار من آيكونيك ماشين الهندسية.',
     blog_index(),
 )
+
+# Legal pages live in legal.py so both languages share one structure.
+pages['privacy-policy.html'] = ('سياسة الخصوصية', 'كيف يجمع موقع iconicmach.com معلوماتك ويستخدمها ويحميها، وحقوقك بموجب القانون المصري.', legal.privacy_page('ar'))
+pages['terms.html'] = ('الشروط والأحكام', 'شروط استخدام موقع iconicmach.com، وكيفية عمل عروض الأسعار والعقود والضمان لدينا.', legal.terms_page('ar'))
 
 # Human-readable site tree.
 page_heroes['sitemap.html'] = ('image', '../assets/images/industrial-process-2.jpeg', 'خريطة الموقع', 'اعثر على أي صفحة في الموقع.')

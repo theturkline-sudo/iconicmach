@@ -3,6 +3,7 @@ import os
 import re
 
 import articles
+import legal
 import widgets
 
 domain = "https://iconicmach.com"
@@ -18,7 +19,7 @@ WEB3FORMS_ACCESS_KEY = "8fdf1126-4ed7-4dc6-aea5-6714b12d50ad"
 
 # Bump when any file in assets/css or assets/js changes, so returning visitors
 # do not run a stale cached script against newly generated HTML.
-ASSET_VERSION = "7"
+ASSET_VERSION = "8"
 
 
 def analytics_snippet():
@@ -814,37 +815,6 @@ pages = {
         </div>
     </section>'''),
 
-    'privacy-policy.html': ('Privacy Policy', 'Privacy policy for Iconic Mach Engineering.', '''
-    <section id="main-content" class="section">
-        <div class="container" style="max-width:800px;">
-            <div class="card bg-main" style="padding:40px; box-shadow:var(--shadow-sm);">
-                <h2 class="text-primary" style="margin-bottom:20px;">Your Privacy Matters</h2>
-                <p style="line-height:1.8; margin-bottom:16px;">Iconic Mach Engineering is committed to protecting your personal information. We collect only the data necessary to respond to your enquiries and improve our services.</p>
-                <h3 style="margin:24px 0 10px;">What We Collect</h3>
-                <p style="line-height:1.8; margin-bottom:16px;">Name, email address, phone number, and project details provided through our contact or quotation forms.</p>
-                <h3 style="margin:24px 0 10px;">How We Use It</h3>
-                <p style="line-height:1.8; margin-bottom:16px;">Your data is used solely to respond to your enquiries and, where consented, to send relevant engineering updates. It is never sold to third parties.</p>
-                <h3 style="margin:24px 0 10px;">Contact Us</h3>
-                <p style="line-height:1.8;">For any privacy concerns, please email <a href="mailto:sales@iconicmach.com" style="color:var(--primary-blue);">sales@iconicmach.com</a>.</p>
-            </div>
-        </div>
-    </section>'''),
-
-    'terms.html': ('Terms & Conditions', 'Terms and conditions for Iconic Mach Engineering services.', '''
-    <section id="main-content" class="section">
-        <div class="container" style="max-width:800px;">
-            <div class="card bg-main" style="padding:40px; box-shadow:var(--shadow-sm);">
-                <h2 class="text-primary" style="margin-bottom:20px;">Terms & Conditions</h2>
-                <p style="line-height:1.8; margin-bottom:16px;">By engaging with Iconic Mach Engineering for products or services, you agree to the following terms. These terms govern the use of our website, quotations, contracts, and installations.</p>
-                <h3 style="margin:24px 0 10px;">Quotations</h3>
-                <p style="line-height:1.8; margin-bottom:16px;">All quotations are valid for 30 days from the date of issue unless otherwise stated. Prices are subject to material and currency fluctuations.</p>
-                <h3 style="margin:24px 0 10px;">Warranties</h3>
-                <p style="line-height:1.8; margin-bottom:16px;">All manufactured systems carry a 12-month warranty against defects in materials and workmanship from the date of commissioning.</p>
-                <h3 style="margin:24px 0 10px;">Intellectual Property</h3>
-                <p style="line-height:1.8;">All engineering drawings, designs, and documentation produced by Iconic Mach Engineering remain our intellectual property unless explicitly transferred in writing.</p>
-            </div>
-        </div>
-    </section>'''),
 }
 
 # ---------------------------------------------------------------------------
@@ -916,6 +886,10 @@ pages['blog.html'] = (
     'Latest articles, insights and news from Iconic Mach Engineering.',
     blog_index(),
 )
+
+# Legal pages live in legal.py so both languages share one structure.
+pages['privacy-policy.html'] = ('Privacy Policy', 'How iconicmach.com collects, uses and protects your information, and your rights under Egyptian law.', legal.privacy_page('en'))
+pages['terms.html'] = ('Terms & Conditions', 'Terms for using iconicmach.com, and how our quotations, contracts and warranty work.', legal.terms_page('en'))
 
 # Human-readable site tree.
 page_heroes['sitemap.html'] = ('image', '../assets/images/industrial-process-2.jpeg', 'Site Map', 'Find any page on the site.')

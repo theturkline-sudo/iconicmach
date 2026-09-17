@@ -497,3 +497,15 @@ body.chat-open .floating-actions a { display: none; }
     .floating-actions a:hover,
     .floating-actions button:hover { transform: none; }
 }
+
+
+/* --- Legal pages (privacy, terms) ------------------------------------------
+   Two-column contents list on wide screens; one column and tighter card
+   padding on phones, where two columns left ~86px per title. */
+.legal-toc ol { columns: 2; column-gap: 28px; }
+.legal-toc li { break-inside: avoid; }
+
+@media (max-width: 600px) {
+    .legal-toc ol { columns: 1; }
+    .legal-card { padding: 24px 20px !important; }
+}
