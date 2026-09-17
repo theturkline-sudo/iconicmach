@@ -19,19 +19,36 @@ WEB3FORMS_ACCESS_KEY = "8fdf1126-4ed7-4dc6-aea5-6714b12d50ad"
 
 # Bump when any file in assets/css or assets/js changes, so returning visitors
 # do not run a stale cached script against newly generated HTML.
-ASSET_VERSION = "8"
+ASSET_VERSION = "9"
 
 
 def analytics_snippet():
     if not GA_MEASUREMENT_ID:
         return ""
-    return '''<script async src="https://www.googletagmanager.com/gtag/js?id={gid}"></script>
-    <script>
+    # Consent Mode default MUST be set before gtag('config') and before the
+    # library loads, synchronously — otherwise the first pageview sets _ga
+    # cookies before the visitor has answered. Default is 'denied' unless a
+    # prior accept is stored, in which case we grant immediately so returning
+    # visitors are not double-counted as cookieless. Ad signals are always
+    # denied: the site runs no advertising.
+    return '''<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){{dataLayer.push(arguments);}}
+        (function () {{
+            var c = null;
+            try {{ c = localStorage.getItem('cookie-consent'); }} catch (e) {{}}
+            gtag('consent', 'default', {{
+                analytics_storage: c === 'granted' ? 'granted' : 'denied',
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                wait_for_update: 500
+            }});
+        }})();
         gtag('js', new Date());
         gtag('config', '{gid}', {{ anonymize_ip: true }});
-    </script>'''.format(gid=GA_MEASUREMENT_ID)
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={gid}"></script>'''.format(gid=GA_MEASUREMENT_ID)
 
 
 ORGANIZATION = {
@@ -372,6 +389,7 @@ FOOTER = '''
                     <a href="privacy-policy.html" style="color:#c9d8ec; text-decoration:none;">سياسة الخصوصية</a>
                     <a href="terms.html" style="color:#c9d8ec; text-decoration:none;">الشروط والأحكام</a>
                     <a href="sitemap.html" style="color:#c9d8ec;text-decoration:none;">خريطة الموقع</a>
+                    ''' + widgets.cookie_settings_link('ar') + '''
                 </div>
             </div>
         </div>
@@ -543,8 +561,8 @@ pages = {
                         <div style="display:flex; align-items:flex-start; gap:16px;"><div style="font-size:1.6rem;line-height:1;">🔧</div><div><strong>الدعم الفني</strong><br><a href="mailto:technical@iconicmach.com" style="color:var(--primary-blue);text-decoration:none;">technical@iconicmach.com</a></div></div>
                     </div>
                     <div style="border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm);">
-                        <iframe title="موقع آيكونيك ماشين الهندسية"
-                            src="https://www.google.com/maps?q=30.2930808,31.7461565&z=18&output=embed"
+                        ''' + widgets.map_placeholder('ar') + '''<iframe title="موقع آيكونيك ماشين الهندسية"
+                            data-consent-src="https://www.google.com/maps?q=30.2930808,31.7461565&z=18&output=embed"
                             width="100%" height="300" style="border:0; display:block;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
                     </div>
@@ -894,7 +912,9 @@ template = """<!DOCTYPE html>
     <script src="../assets/js/animations.js?v={asset_version}"></script>
     <script src="../assets/js/forms.js?v={asset_version}"></script>
     <script src="../assets/js/chat.js?v={asset_version}" defer></script>
+    <script src="../assets/js/consent.js?v={asset_version}" defer></script>
 {floating}
+{cookie_banner}
 {video_loader}
 </body>
 </html>"""
@@ -919,6 +939,7 @@ for filename, (title, description, content) in pages.items():
         slug=slug_for(filename),
         video_loader=VIDEO_LOADER,
         floating=widgets.floating_widgets("ar"),
+        cookie_banner=widgets.cookie_banner("ar"),
         asset_version=ASSET_VERSION,
     )
     page = prettify_links(page)

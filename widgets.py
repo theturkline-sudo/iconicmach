@@ -541,3 +541,74 @@ def sitemap_page(lang):
             </div>
         </div>
     </section>'''.format(desc=s["desc"], blocks="".join(blocks))
+
+
+# --- Cookie consent banner --------------------------------------------------
+#
+# Paired with assets/js/consent.js and the Consent Mode default in the GA
+# snippet. The banner only appears when no choice is stored. "Essential only"
+# leaves GA4 in cookieless mode and keeps the Maps embed unloaded.
+
+COOKIE_STRINGS = {
+    "en": {
+        "label": "Cookie choices",
+        "title": "Cookies on this site",
+        "body": (
+            "We use Google Analytics to see which pages are useful. It sets cookies only if you "
+            "accept; otherwise the site works exactly the same and we receive no cookie data. "
+            "The map on the contact page also loads only with your consent."
+        ),
+        "link": "Privacy policy",
+        "decline": "Essential only",
+        "accept": "Accept analytics",
+        "settings": "Cookie settings",
+        "load_map": "Load map",
+        "map_note": "Loading the map sends your IP address to Google and may set Google cookies.",
+    },
+    "ar": {
+        "label": "خيارات ملفات تعريف الارتباط",
+        "title": "ملفات تعريف الارتباط في هذا الموقع",
+        "body": (
+            "نستخدم Google Analytics لمعرفة الصفحات المفيدة. لا يضع ملفات تعريف ارتباط إلا إذا "
+            "وافقت؛ وإلا يعمل الموقع كما هو تماماً ولا نتلقى أي بيانات منها. كما لا تُحمَّل الخريطة "
+            "في صفحة التواصل إلا بموافقتك."
+        ),
+        "link": "سياسة الخصوصية",
+        "decline": "الضروري فقط",
+        "accept": "قبول التحليلات",
+        "settings": "إعدادات ملفات تعريف الارتباط",
+        "load_map": "تحميل الخريطة",
+        "map_note": "تحميل الخريطة يرسل عنوان IP الخاص بك إلى جوجل وقد يضع ملفات تعريف ارتباط من جوجل.",
+    },
+}
+
+
+def cookie_banner(lang):
+    s = COOKIE_STRINGS[lang]
+    # Section 7 of the privacy policy is "Cookies" in both languages.
+    return '''
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="{label}" hidden>
+        <div class="cookie-banner__text">
+            <strong>{title}</strong>
+            <p>{body} <a href="privacy-policy#s7">{link}</a></p>
+        </div>
+        <div class="cookie-banner__actions">
+            <button type="button" class="cookie-btn cookie-btn--ghost" data-consent="decline">{decline}</button>
+            <button type="button" class="cookie-btn cookie-btn--primary" data-consent="accept">{accept}</button>
+        </div>
+    </div>'''.format(**s)
+
+
+def cookie_settings_link(lang):
+    """Footer link that reopens the banner. Inline handler is fine: CSP allows 'unsafe-inline'."""
+    return ('<a href="#" onclick="window.openCookieSettings && openCookieSettings(); return false;" '
+            'style="color:#c9d8ec; text-decoration:none;">{}</a>').format(COOKIE_STRINGS[lang]["settings"])
+
+
+def map_placeholder(lang):
+    s = COOKIE_STRINGS[lang]
+    return '''<div class="consent-placeholder" style="height:300px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:var(--bg-alt); text-align:center; padding:24px;">
+                            <p style="font-size:.9rem; color:var(--text-muted); max-width:420px; margin:0; line-height:1.7;">{map_note}</p>
+                            <button type="button" class="btn btn-primary" data-consent-load style="padding:11px 24px;">{load_map}</button>
+                        </div>
+                        '''.format(**s)

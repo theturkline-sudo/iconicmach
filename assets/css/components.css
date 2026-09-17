@@ -509,3 +509,63 @@ body.chat-open .floating-actions a { display: none; }
     .legal-toc ol { columns: 1; }
     .legal-card { padding: 24px 20px !important; }
 }
+
+/* --- Cookie consent banner ------------------------------------------------
+   Sits at the inline-start corner, opposite the floating contact buttons.
+   On phones it spans the width and the contact buttons step aside, the same
+   way they do for the chat panel. */
+.cookie-banner {
+    position: fixed;
+    inset-block-end: 20px;
+    inset-inline-start: 20px;
+    z-index: 950;
+    max-width: 440px;
+    padding: 20px 22px;
+    background: var(--bg-main);
+    color: var(--text-main);
+    border: 1px solid var(--surface-light);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.cookie-banner[hidden] { display: none; }
+
+.cookie-banner__text strong { display: block; margin-bottom: 6px; font-size: 1rem; }
+.cookie-banner__text p { margin: 0; font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); }
+.cookie-banner__text a { color: var(--primary-blue); font-weight: 600; }
+[data-theme="dark"] .cookie-banner__text a { color: #4adeae; }
+
+.cookie-banner__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.cookie-btn {
+    flex: 1 1 auto;
+    padding: 11px 16px;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.cookie-btn--primary { background: var(--primary-blue); color: #fff; border: 2px solid var(--primary-blue); }
+.cookie-btn--primary:hover { background: var(--primary-blue-light); border-color: var(--primary-blue-light); }
+.cookie-btn--ghost { background: transparent; color: var(--text-main); border: 2px solid var(--surface-light); }
+.cookie-btn--ghost:hover { border-color: var(--primary-blue-light); }
+
+.cookie-btn:focus-visible { outline: 3px solid var(--primary-blue-light); outline-offset: 2px; }
+
+@media (max-width: 600px) {
+    .cookie-banner {
+        inset-block-end: 12px;
+        inset-inline: 12px;
+        max-width: none;
+        padding: 16px 18px;
+    }
+    body.cookie-open .floating-actions { display: none; }
+}

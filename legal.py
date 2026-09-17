@@ -129,7 +129,11 @@ PRIVACY = {
                 "- <code>__cf_bm</code> and similar — Cloudflare, to distinguish humans from "
                 "automated traffic. Short-lived.",
                 "- The embedded Google Map may set Google's own cookies when it loads.",
-                "You can block or delete cookies in your browser settings; the site will still work. "
+                "A banner asks for your choice on your first visit. Until you accept, Google Analytics runs "
+                "without cookies and receives only aggregate, unidentifiable data, and the Google Map on the "
+                "contact page is not loaded. Your choice is remembered in your browser; change it at any time "
+                "through the <em>Cookie settings</em> link in the footer.",
+                "You can also block or delete cookies in your browser settings; the site will still work. "
                 "To opt out of Google Analytics across all sites, Google offers a browser add-on at "
                 "tools.google.com/dlpage/gaoptout.",
             ]),
@@ -244,7 +248,11 @@ PRIVACY = {
                 "- <code>__cf_bm</code> وما شابهه — من Cloudflare، للتمييز بين البشر والزيارات "
                 "الآلية. قصير الأجل.",
                 "- قد تضع خريطة جوجل المضمّنة ملفات تعريف ارتباط خاصة بجوجل عند تحميلها.",
-                "يمكنك حظر ملفات تعريف الارتباط أو حذفها من إعدادات المتصفح وسيظل الموقع يعمل. "
+                "يطلب شريط في أول زيارة اختيارك. وحتى توافق، يعمل Google Analytics دون ملفات تعريف "
+                "ارتباط ولا يتلقى سوى بيانات مجمّعة لا تحدد الهوية، ولا تُحمَّل خريطة جوجل في صفحة التواصل. "
+                "يُحفظ اختيارك في متصفحك، ويمكنك تغييره في أي وقت عبر رابط <em>إعدادات ملفات تعريف "
+                "الارتباط</em> في أسفل الصفحة.",
+                "يمكنك أيضاً حظر ملفات تعريف الارتباط أو حذفها من إعدادات المتصفح وسيظل الموقع يعمل. "
                 "ولإيقاف Google Analytics في كل المواقع، توفر جوجل إضافة للمتصفح على "
                 "tools.google.com/dlpage/gaoptout.",
             ]),
